@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ScamShield AI</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top Header -->
+    <header class="app-header">
+      <div class="brand">
+        <img src="../icons/icon32.png" alt="ScamShield Logo" class="brand-logo">
+        <div>
+          <h1 class="brand-title">ScamShield AI</h1>
+          <span class="brand-subtitle">Online Safety Assistant</span>
+        </div>
+      </div>
+      <div class="protection-toggle-wrapper">
+        <label class="switch" title="Toggle Real-Time Protection">
+          <input type="checkbox" id="toggle-protection" checked>
+          <span class="slider round"></span>
+        </label>
+        <span class="toggle-status" id="toggle-label">Active</span>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+      <button class="tab-btn active" data-tab="tab-site">
+        <span class="tab-icon">🌐</span>
+        <span class="tab-text">Site Check</span>
+      </button>
+      <button class="tab-btn" data-tab="tab-link">
+        <span class="tab-icon">🔗</span>
+        <span class="tab-text">Check Link</span>
+      </button>
+      <button class="tab-btn" data-tab="tab-message">
+        <span class="tab-icon">💬</span>
+        <span class="tab-text">Messages</span>
+      </button>
+      <button class="tab-btn" data-tab="tab-shopping">
+        <span class="tab-icon">🛍️</span>
+        <span class="tab-text">Shopping</span>
+      </button>
+      <button class="tab-btn" data-tab="tab-settings">
+        <span class="tab-icon">⚙️</span>
+        <span class="tab-text">Settings</span>
+      </button>
+    </nav>
+
+    <!-- TAB 1: Current Site Check -->
+    <main class="tab-content active" id="tab-site">
+      <div class="card site-overview-card">
+        <div class="site-header-row">
+          <div class="site-meta">
+            <span class="site-domain" id="site-domain">Checking current page...</span>
+            <span class="site-protocol" id="site-protocol"></span>
+          </div>
+          <div class="risk-badge-pill" id="site-risk-badge">Checking</div>
+        </div>
+
+        <!-- Risk Score Meter -->
+        <div class="score-container">
+          <div class="score-bar-bg">
+            <div class="score-bar-fill" id="site-score-fill" style="width: 0%"></div>
+          </div>
+          <div class="score-label-row">
+            <span>Safety Score</span>
+            <strong id="site-score-value">--/100</strong>
+          </div>
+        </div>
+
+        <p class="explanation-summary" id="site-summary">Analyzing domain safety records and security indicators...</p>
+      </div>
+
+      <!-- Simple Explanation Section -->
+      <div class="card" id="site-details-card">
+        <h3 class="card-title">Simple Safety Breakdown</h3>
+        <div class="section-block" id="site-reasons-block">
+          <h4 class="sub-heading">Why it looks this way:</h4>
+          <ul class="clean-list" id="site-reasons-list"></ul>
+        </div>
+
+        <div class="section-block" id="site-steps-block">
+          <h4 class="sub-heading">What you should do next:</h4>
+          <ul class="clean-list steps-list" id="site-steps-list"></ul>
+        </div>
+
+        <div class="actions-row">
+          <button class="btn btn-secondary" id="btn-whitelist-site">⭐ Trust This Domain</button>
+          <button class="btn btn-secondary" id="btn-rescan-site">🔄 Refresh Scan</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- TAB 2: Check Link (URL Inspector) -->
+    <section class="tab-content" id="tab-link">
+      <div class="card">
+        <h3 class="card-title">Inspect Link Before Clicking</h3>
+        <p class="card-caption">Check unfamiliar links from emails, SMS, or social media for sneaky lookalikes and phishing traps.</p>
+        
+        <div class="input-group">
+          <input type="text" id="input-inspect-url" placeholder="Paste link (e.g., https://paypa1-security.xyz)" class="text-input">
+          <button class="btn btn-primary" id="btn-inspect-url">Scan Link</button>
+        </div>
+
+        <!-- Quick Samples for Easy Testing -->
+        <div class="sample-chips">
+          <span class="sample-label">Try sample:</span>
+          <button class="chip" data-sample-url="https://paypa1-login.top/verify-account">PayPal Phish</button>
+          <button class="chip" data-sample-url="https://usps-tracking-redelivery.xyz/fee">USPS Smishing</button>
+          <button class="chip" data-sample-url="https://www.apple.com">Apple Official</button>
+        </div>
+      </div>
+
+      <div class="card result-card hidden" id="link-result-card">
+        <div class="site-header-row">
+          <span class="site-domain" id="link-result-domain"></span>
+          <div class="risk-badge-pill" id="link-result-badge"></div>
+        </div>
+        <p class="explanation-summary" id="link-result-summary"></p>
+        <div class="section-block">
+          <h4 class="sub-heading">Red flags detected:</h4>
+          <ul class="clean-list" id="link-result-reasons"></ul>
+        </div>
+        <div class="section-block">
+          <h4 class="sub-heading">Recommended action:</h4>
+          <ul class="clean-list steps-list" id="link-result-steps"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: Message Analyzer -->
+    <section class="tab-content" id="tab-message">
+      <div class="card">
+        <h3 class="card-title">Scam Message & SMS Analyzer</h3>
+        <p class="card-caption">Paste any text message, email, or chat to scan for fake urgency, postal parcel scams, or banking fraud.</p>
+
+        <textarea id="input-message-text" class="textarea-input" rows="4" placeholder="Paste suspicious SMS or email text here..."></textarea>
+        
+        <div class="button-row">
+          <button class="btn btn-primary" id="btn-analyze-message">Analyze Message</button>
+          <button class="btn btn-secondary" id="btn-clear-message">Clear</button>
+        </div>
+
+        <!-- Quick Message Samples -->
+        <div class="sample-chips">
+          <span class="sample-label">Try sample:</span>
+          <button class="chip" data-sample-msg="USPS: Your package could not be delivered due to an unpaid customs fee of $1.85. Click here to reschedule within 24 hours: https://usps-fee-update.xyz">USPS Parcel</button>
+          <button class="chip" data-sample-msg="CHASE ALERT: Did you authorize $945 at Apple Store? Reply with your 6-digit one time password to cancel immediately or your account will be suspended.">Bank Fraud</button>
+          <button class="chip" data-sample-msg="Hey Mom, I lost my phone and this is my new temporary number. Can you please wire $450 to my friend via Zelle right now?">Family Emergency</button>
+        </div>
+      </div>
+
+      <div class="card result-card hidden" id="message-result-card">
+        <div class="site-header-row">
+          <h4 class="card-title" id="message-result-title">Message Analysis</h4>
+          <div class="risk-badge-pill" id="message-result-badge"></div>
+        </div>
+        <p class="explanation-summary" id="message-result-summary"></p>
+        <div class="section-block">
+          <h4 class="sub-heading">Warning signs identified:</h4>
+          <ul class="clean-list" id="message-result-triggers"></ul>
+        </div>
+        <div class="section-block">
+          <h4 class="sub-heading">What you should do:</h4>
+          <ul class="clean-list steps-list" id="message-result-steps"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: Shopping Safety -->
+    <section class="tab-content" id="tab-shopping">
+      <div class="card">
+        <h3 class="card-title">Online Storefront Investigator</h3>
+        <p class="card-caption">Protect your credit card from fake stores, 90% liquidation traps, and artificial urgency countdowns.</p>
+        
+        <div class="shopping-status-box" id="shopping-status-box">
+          <div class="status-indicator-row">
+            <span class="status-icon" id="shop-status-icon">🛍️</span>
+            <div>
+              <strong id="shop-status-title">Checking current storefront...</strong>
+              <div class="shop-status-sub" id="shop-status-sub">Scanning product discounts, countdown timers, and payment methods.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block" id="shop-alerts-block">
+          <h4 class="sub-heading">Storefront Inspection Signals:</h4>
+          <ul class="clean-list" id="shop-alerts-list"></ul>
+        </div>
+
+        <div class="shopping-tips-card">
+          <h4>💡 Golden Rules for Online Shopping:</h4>
+          <ul class="clean-list">
+            <li>Never buy from stores asking for wire transfers, Zelle, or gift cards.</li>
+            <li>If a $1,000 laptop or designer bag is listed for $39, it is a scam.</li>
+            <li>Use credit cards or PayPal Goods & Services for buyer chargeback protection.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: History & Settings -->
+    <section class="tab-content" id="tab-settings">
+      <div class="card">
+        <h3 class="card-title">Preferences</h3>
+        <div class="setting-row">
+          <div>
+            <strong>Highlight Deceptive Links</strong>
+            <p class="setting-desc">Flags links whose text differs from actual destination.</p>
+          </div>
+          <input type="checkbox" id="setting-link-inspect" checked>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <strong>Shopping Scam Alerts</strong>
+            <p class="setting-desc">Flags fake countdowns and unrealistic 90% discount claims.</p>
+          </div>
+          <input type="checkbox" id="setting-shopping-alerts" checked>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <strong>Optional PHP Backend API</strong>
+            <p class="setting-desc">Sync with Google Safe Browsing / VirusTotal proxy.</p>
+          </div>
+          <input type="checkbox" id="setting-backend-api">
+        </div>
+
+        <div class="input-group hidden" id="backend-url-group">
+          <input type="text" id="setting-backend-url" class="text-input" placeholder="http://localhost/scamshield-backend/index.php">
+          <button class="btn btn-secondary" id="btn-save-backend">Save</button>
+        </div>
+      </div>
+
+      <!-- Scan History -->
+      <div class="card">
+        <div class="site-header-row">
+          <h3 class="card-title">Recent Scan History</h3>
+          <button class="btn btn-small" id="btn-clear-history">Clear History</button>
+        </div>
+        <div class="history-list" id="history-container">
+          <div class="empty-state">No recent scans recorded yet.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <span>ScamShield AI v1.0.0</span>
+      <span>Manifest V3 • Privacy First</span>
+    </footer>
+  </div>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

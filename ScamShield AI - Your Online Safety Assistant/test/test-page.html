@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ScamShield AI - Local Test Playground</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+      background: #f8fafc;
+      color: #0f172a;
+      line-height: 1.6;
+    }
+    h1 { color: #0284c7; }
+    .test-box {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    }
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .badge-test { background: #e0f2fe; color: #0369a1; }
+    .warning-box {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      padding: 12px;
+      border-radius: 6px;
+      margin-top: 10px;
+      color: #991b1b;
+      font-size: 13px;
+    }
+    .timer {
+      display: inline-block;
+      background: #fee2e2;
+      color: #b91c1c;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: bold;
+      animation: pulse 1s infinite alternate;
+    }
+    @keyframes pulse { from { opacity: 0.7; } to { opacity: 1; } }
+  </style>
+</head>
+<body>
+
+  <h1>🛡️ ScamShield AI — Test Playground</h1>
+  <p>Use this page to safely verify all 5 features of ScamShield AI on your local computer.</p>
+
+  <!-- TEST 1: Deceptive Link Inspection -->
+  <div class="test-box">
+    <span class="badge badge-test">FEATURE 2: DECEPTIVE LINK TEST</span>
+    <h3>Test 1: Misleading Link</h3>
+    <p>Below is a classic phishing trick where the link text says PayPal, but the actual destination is a scam address. Hover your mouse over it:</p>
+    
+    <p>
+      👉 <a href="http://evil-phishing-login.xyz/steal-credentials">https://www.paypal.com/signin</a>
+    </p>
+
+    <div class="warning-box">
+      <strong>Expected behavior:</strong> ScamShield AI will highlight this link with a red dashed outline. Hovering over it will display a warning tooltip explaining that the text does not match the actual website!
+    </div>
+  </div>
+
+  <!-- TEST 2: Right Click Context Menu -->
+  <div class="test-box">
+    <span class="badge badge-test">FEATURE 4 & 5: RIGHT-CLICK TEXT SCAN</span>
+    <h3>Test 2: Highlight & Scan Suspicious Text</h3>
+    <p>Highlight the text below, right-click, and select <strong>"🔍 Check text for scam red flags"</strong>:</p>
+
+    <blockquote style="background: #f1f5f9; padding: 12px; border-left: 4px solid #0284c7; font-style: italic;">
+      "USPS: Your package could not be delivered due to an unpaid customs fee of $1.85. Click here to reschedule within 24 hours: https://usps-parcel-fees.top"
+    </blockquote>
+
+    <div class="warning-box">
+      <strong>Expected behavior:</strong> A floating safety card appears in the top-right corner explaining the parcel smishing tactic and what you should do next.
+    </div>
+  </div>
+
+  <!-- TEST 3: Fake Shopping Storefront Signals -->
+  <div class="test-box">
+    <span class="badge badge-test">FEATURE 3: FAKE SHOPPING TEST</span>
+    <h3>Test 3: Deceptive Online Storefront Simulation</h3>
+    <p><strong>🔥 95% OFF EVERYTHING TODAY ONLY! FACTORY LIQUIDATION!</strong></p>
+    <p>Sale ends in: <span class="timer">04:59</span></p>
+    <p>Payment Methods: <em>We accept Western Union, Zelle, and Apple Gift Cards for extra discount.</em></p>
+
+    <div class="warning-box">
+      <strong>Expected behavior:</strong> When you open the ScamShield popup and click the <strong>Shopping</strong> tab, it will flag the 95% discount claim, urgency timer, and unprotected wire payment methods!
+    </div>
+  </div>
+
+  <!-- TEST 4: Legitimate Link Check -->
+  <div class="test-box">
+    <span class="badge badge-test">FEATURE 1: VERIFIED GENUINE DOMAIN</span>
+    <h3>Test 4: Honest Link</h3>
+    <p>Clicking an honest, verified brand link should never trigger false alarm warnings:</p>
+    <p>
+      👉 <a href="https://www.apple.com">https://www.apple.com</a>
+    </p>
+    <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 12px; border-radius: 6px; color: #166534; font-size: 13px; margin-top: 10px;">
+      <strong>Expected behavior:</strong> Recognized as an official, verified brand with 100/100 safety score.
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+{
+  "phishing_url_samples": [
+    {
+      "name": "PayPal Typosquatting Phish",
+      "url": "https://paypa1-secure-verification.top/login/update-billing",
+      "expected_verdict": "DANGER",
+      "expected_reasons": ["Impersonates PayPal with typosquatting", "High risk .top TLD", "Sensitive phishing path"]
+    },
+    {
+      "name": "USPS Package Smishing Link",
+      "url": "https://usps-redelivery-tracking.xyz/claim-fee",
+      "expected_verdict": "DANGER",
+      "expected_reasons": ["Compound brand spoofing", "Suspicious .xyz TLD"]
+    },
+    {
+      "name": "Raw IP Host with Urgent Login",
+      "url": "http://185.220.101.5/verify-account",
+      "expected_verdict": "DANGER",
+      "expected_reasons": ["Raw IP address instead of domain", "Unencrypted HTTP"]
+    },
+    {
+      "name": "Legitimate Official Apple Domain",
+      "url": "https://www.apple.com/shop",
+      "expected_verdict": "SAFE",
+      "expected_reasons": ["Verified genuine brand domain"]
+    }
+  ],
+  "message_samples": [
+    {
+      "name": "USPS Parcel Undelivered Scam",
+      "text": "USPS: Your package could not be delivered due to an unpaid customs fee of $1.85. Click here to reschedule within 24 hours: https://usps-parcel-fees.top",
+      "expected_verdict": "HIGH_SCAM_RISK"
+    },
+    {
+      "name": "Bank Fraud Alert OTP Harvesting",
+      "text": "CHASE ALERT: Did you authorize $945 at Apple Store? Reply with your 6-digit one time password to cancel immediately or your account will be suspended.",
+      "expected_verdict": "HIGH_SCAM_RISK"
+    },
+    {
+      "name": "Geek Squad Fake Invoice Scam",
+      "text": "Geek Squad: Your subscription of $399 has been auto-renewed. If you did not make this purchase, call our fraud department at 1-800-555-0199 immediately for a refund.",
+      "expected_verdict": "HIGH_SCAM_RISK"
+    },
+    {
+      "name": "Crypto Giveaway Scam",
+      "text": "Congratulations! You have been selected as the winner of 0.5 BTC. Claim your prize now with guaranteed returns: https://crypto-winner-prize.click",
+      "expected_verdict": "HIGH_SCAM_RISK"
+    },
+    {
+      "name": "Friendly Normal Text",
+      "text": "Hey, let me know what time you are reaching the library today so we can study together.",
+      "expected_verdict": "LIKELY_SAFE"
+    }
+  ],
+  "shopping_scam_samples": [
+    {
+      "name": "Deceptive 95% Liquidation Store",
+      "signals": "Warehouse blowout clearance! 95% off everything today only! Western Union or Zelle accepted for extra discount. Hurry only 1 left in stock!",
+      "expected_flags": ["Extreme discount", "Unprotected payment", "Fake urgency"]
+    }
+  ]
+}
