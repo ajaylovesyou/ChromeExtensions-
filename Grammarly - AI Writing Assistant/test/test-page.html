@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grammarly AI Writing Assistant - Live Test Environment</title>
+  <style>
+    :root {
+      --primary: #10b981;
+      --primary-hover: #059669;
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --text-muted: #64748b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 40px 20px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .logo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      color: #059669;
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    .card h2 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card p.hint {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      font-size: 13.5px;
+      margin-bottom: 6px;
+    }
+
+    textarea, input[type="text"], .content-editable-box {
+      width: 100%;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-family: inherit;
+      font-size: 14px;
+      line-height: 1.6;
+      outline: none;
+      transition: all 0.2s ease;
+      background: #ffffff;
+      color: var(--text);
+    }
+
+    textarea:focus, input[type="text"]:focus, .content-editable-box:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+    }
+
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .content-editable-box {
+      min-height: 120px;
+      overflow-y: auto;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    button.btn {
+      background: #f1f5f9;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    button.btn:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    button.btn.primary {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary-hover);
+    }
+
+    button.btn.primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .features-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .feature-item {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .feature-item h3 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .feature-item p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo-badge">
+        <span>✨</span> Grammarly AI Writing Assistant
+      </div>
+      <h1>Interactive Live Test Page</h1>
+      <p class="subtitle">Focus any text box below to see the in-page emerald floating assistant in action!</p>
+    </header>
+
+    <!-- Test 1: Standard Textarea -->
+    <div class="card">
+      <h2>📝 Test Case 1: Standard Textarea</h2>
+      <p class="hint">Contains intentional grammar errors, spelling typos, and wordy clarity issues.</p>
+      
+      <label for="demo-textarea">Email / Message Composition:</label>
+      <textarea id="demo-textarea">their are several issues with the proposal. in order to make a decision, he have to loose weight and we recieved the document untill tommorrow. it's color was truely an unexpected surprise, but irregardless, they was definately excited about the end result.</textarea>
+
+      <div class="button-group">
+        <button class="btn" onclick="resetTextarea()">Reset Sample</button>
+        <button class="btn" onclick="clearTextarea()">Clear</button>
+      </div>
+    </div>
+
+    <!-- Test 2: Single-line Text Input -->
+    <div class="card">
+      <h2>💬 Test Case 2: Single-line Input</h2>
+      <p class="hint">Test assistant badge positioning on standard input fields.</p>
+
+      <label for="demo-input">Subject Line / Tweet:</label>
+      <input type="text" id="demo-input" value="your welcome to attend a apple presentation faster then ever!">
+    </div>
+
+    <!-- Test 3: ContentEditable Element -->
+    <div class="card">
+      <h2>📬 Test Case 3: Rich ContentEditable Box</h2>
+      <p class="hint">Simulates modern web apps like Gmail compose, Notion, LinkedIn, and Slack.</p>
+
+      <label>Rich Text Box:</label>
+      <div class="content-editable-box" contenteditable="true">
+        Hey team, what's up! Pursuant to our discussion, we should of completed the review. The work was completed by our intern and we will completely eliminate the error asap.
+      </div>
+    </div>
+
+    <!-- Feature Capabilities Summary -->
+    <div class="card">
+      <h2>⚡ Extension Capabilities Tested Here</h2>
+      <div class="features-list">
+        <div class="feature-item">
+          <h3>🔴 Spelling</h3>
+          <p>Instant typo detection (definately → definitely, recieved → received, untill → until) + custom dictionary.</p>
+        </div>
+        <div class="feature-item">
+          <h3>🟡 Grammar</h3>
+          <p>Subject-verb agreement (he have → has), homophones (their/there, your/you're, its/it's), modals (should of → have).</p>
+        </div>
+        <div class="feature-item">
+          <h3>🔵 Clarity</h3>
+          <p>Cuts wordiness (in order to → to), eliminates redundancies (end result → result), flags passive voice.</p>
+        </div>
+        <div class="feature-item">
+          <h3>🟣 Tone</h3>
+          <p>Detects Professional, Friendly, Confident, Direct, Urgent, and Empathetic tones + instant rephrasing.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const originalSample = "their are several issues with the proposal. in order to make a decision, he have to loose weight and we recieved the document untill tommorrow. it's color was truely an unexpected surprise, but irregardless, they was definately excited about the end result.";
+
+    function resetTextarea() {
+      const ta = document.getElementById('demo-textarea');
+      ta.value = originalSample;
+      ta.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+
+    function clearTextarea() {
+      const ta = document.getElementById('demo-textarea');
+      ta.value = '';
+      ta.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grammarly - AI Writing Assistant</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.88-11.71L10 14.17l-1.88-1.88a.996.996 0 1 0-1.41 1.41l2.59 2.59c.39.39 1.02.39 1.41 0L17.3 9.7a.996.996 0 0 0 0-1.41c-.39-.39-1.03-.39-1.42 0z"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>Grammarly</h1>
+          <span class="subtitle">AI Writing Assistant</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div class="score-badge-container" title="Overall Writing Score">
+          <div class="score-circle" id="score-circle">
+            <span id="score-value">100</span>
+          </div>
+        </div>
+        <button id="btn-settings" class="icon-btn" title="Open Settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Editor Toolbar -->
+    <div class="editor-toolbar">
+      <div class="toolbar-left">
+        <button id="btn-fix-all" class="action-btn primary" title="Fix all grammar and spelling errors at once">
+          <span>✨ Fix All</span>
+          <span id="fix-count-badge" class="badge">0</span>
+        </button>
+        <button id="btn-load-sample" class="action-btn text-btn" title="Load sample text with deliberate errors">
+          Sample Text
+        </button>
+      </div>
+      <div class="toolbar-right">
+        <button id="btn-copy" class="action-btn secondary" title="Copy text to clipboard">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <span>Copy</span>
+        </button>
+        <button id="btn-clear" class="action-btn secondary" title="Clear text">Clear</button>
+      </div>
+    </div>
+
+    <!-- Text Scratchpad -->
+    <div class="editor-wrapper">
+      <textarea id="text-input" placeholder="Type or paste your text here to check grammar, spelling, clarity, and tone in real-time..."></textarea>
+    </div>
+
+    <!-- AI Rephraser & Tone Presets -->
+    <div class="ai-tone-bar">
+      <span class="tone-label">AI Tone & Style:</span>
+      <div class="tone-buttons">
+        <button class="tone-chip" data-mode="tone_professional" title="Make professional and polite">💼 Professional</button>
+        <button class="tone-chip" data-mode="tone_friendly" title="Make friendly and casual">🤝 Friendly</button>
+        <button class="tone-chip" data-mode="tone_confident" title="Make confident and decisive">⚡ Confident</button>
+        <button class="tone-chip" data-mode="tone_concise" title="Trim fluff and make concise">✂️ Concise</button>
+        <button class="tone-chip" data-mode="summarize" title="Generate bulleted summary">📝 Summarize</button>
+      </div>
+    </div>
+
+    <!-- Metrics Cards Grid -->
+    <div class="metrics-grid">
+      <div class="metric-card" id="card-grammar">
+        <span class="metric-label">Grammar</span>
+        <span class="metric-value text-amber" id="metric-grammar">0</span>
+      </div>
+      <div class="metric-card" id="card-spelling">
+        <span class="metric-label">Spelling</span>
+        <span class="metric-value text-red" id="metric-spelling">0</span>
+      </div>
+      <div class="metric-card" id="card-clarity">
+        <span class="metric-label">Clarity</span>
+        <span class="metric-value text-blue" id="metric-clarity">0</span>
+      </div>
+      <div class="metric-card" id="card-tone">
+        <span class="metric-label">Tone</span>
+        <span class="metric-value text-purple" id="metric-tone">Neutral</span>
+      </div>
+    </div>
+
+    <!-- Detailed Stats Row -->
+    <div class="stats-summary-row">
+      <div class="stat-pill">Words: <strong id="stat-words">0</strong></div>
+      <div class="stat-pill">Characters: <strong id="stat-chars">0</strong></div>
+      <div class="stat-pill">Reading Time: <strong id="stat-reading">0s</strong></div>
+      <div class="stat-pill">Readability: <strong id="stat-readability">100%</strong></div>
+    </div>
+
+    <!-- Suggestions Section -->
+    <section class="suggestions-section">
+      <div class="suggestions-header">
+        <h2>Suggestions (<span id="total-issues-count">0</span>)</h2>
+        <div class="category-tabs">
+          <button class="tab-btn active" data-filter="all">All</button>
+          <button class="tab-btn" data-filter="grammar">Grammar</button>
+          <button class="tab-btn" data-filter="spelling">Spelling</button>
+          <button class="tab-btn" data-filter="clarity">Clarity</button>
+        </div>
+      </div>
+
+      <div class="issues-list" id="issues-list">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <span>Grammarly AI Assistant · Ready</span>
+      <span class="footer-link" id="link-options">Options</span>
+    </footer>
+  </div>
+
+  <!-- Include Engine Libraries -->
+  <script src="../lib/readability.js"></script>
+  <script src="../lib/tone-analyzer.js"></script>
+  <script src="../lib/clarity-engine.js"></script>
+  <script src="../lib/grammar-rules.js"></script>
+  <script src="../lib/spell-checker.js"></script>
+  <script src="../lib/ai-service.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

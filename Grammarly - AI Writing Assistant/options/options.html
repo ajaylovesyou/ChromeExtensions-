@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grammarly - AI Writing Assistant Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="settings-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="settings-sidebar">
+      <div class="sidebar-brand">
+        <div class="logo-box">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.88-11.71L10 14.17l-1.88-1.88a.996.996 0 1 0-1.41 1.41l2.59 2.59c.39.39 1.02.39 1.41 0L17.3 9.7a.996.996 0 0 0 0-1.41c-.39-.39-1.03-.39-1.42 0z"/>
+          </svg>
+        </div>
+        <div>
+          <h2>Grammarly</h2>
+          <span>AI Assistant v1.0.0</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#general" class="nav-link active">General Preferences</a>
+        <a href="#writing-goals" class="nav-link">Writing Style & Goals</a>
+        <a href="#dictionary" class="nav-link">Custom Dictionary</a>
+        <a href="#ai-engine" class="nav-link">AI Engine & Cloud API</a>
+        <a href="#exclusions" class="nav-link">Excluded Domains</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content Panel -->
+    <main class="settings-content">
+      <header class="content-header">
+        <h1>Extension Settings</h1>
+        <div class="header-actions">
+          <button id="btn-reset" class="btn secondary">Reset Defaults</button>
+          <button id="btn-save" class="btn primary">Save Changes</button>
+        </div>
+      </header>
+
+      <!-- Section: General -->
+      <section class="settings-section" id="section-general">
+        <h2>General Preferences</h2>
+        <p class="section-desc">Configure core checking modules and in-page assistance.</p>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <label class="setting-title" for="toggle-extension">Enable Extension</label>
+            <p class="setting-subtitle">Turn all writing assistant features on or off.</p>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="toggle-extension" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <label class="setting-title" for="toggle-floating-widget">In-Page Floating Assistant (G-Badge)</label>
+            <p class="setting-subtitle">Show the floating emerald assistant badge next to text inputs and email compose boxes.</p>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="toggle-floating-widget" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <label class="setting-title" for="toggle-grammar">Grammar & Syntax Rules</label>
+            <p class="setting-subtitle">Detect subject-verb agreement, homophones, modal verbs, and punctuation mistakes.</p>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="toggle-grammar" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <label class="setting-title" for="toggle-spelling">Spelling Checker</label>
+            <p class="setting-subtitle">Identify typos and recommend smart candidate corrections.</p>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="toggle-spelling" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <label class="setting-title" for="toggle-clarity">Clarity & Conciseness</label>
+            <p class="setting-subtitle">Flag wordy phrases, passive voice, and redundant expressions.</p>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="toggle-clarity" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <label class="setting-title" for="toggle-tone">Tone Analyzer</label>
+            <p class="setting-subtitle">Analyze emotional markers and receive tone transformation options.</p>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="toggle-tone" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </section>
+
+      <!-- Section: Writing Goals -->
+      <section class="settings-section" id="section-writing-goals">
+        <h2>Writing Style & Goals</h2>
+        <p class="section-desc">Tailor suggestions to your target audience and tone.</p>
+
+        <div class="form-group">
+          <label for="select-audience">Target Audience</label>
+          <select id="select-audience" class="form-control">
+            <option value="general">General (Broad audience, everyday vocabulary)</option>
+            <option value="knowledgeable">Knowledgeable (Colleagues, managers, informed readers)</option>
+            <option value="academic">Academic / Scholarly (Formal academic prose)</option>
+            <option value="expert">Expert / Technical (Domain specific terminology)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="select-tone">Default Target Tone</label>
+          <select id="select-tone" class="form-control">
+            <option value="professional">Professional (Courteous, business-ready)</option>
+            <option value="friendly">Friendly & Casual (Approachable, warm)</option>
+            <option value="confident">Confident & Decisive (Direct, authoritative)</option>
+            <option value="concise">Concise (Short, punchy, minimal filler)</option>
+            <option value="empathetic">Empathetic (Supportive, diplomatic)</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Section: Personal Dictionary -->
+      <section class="settings-section" id="section-dictionary">
+        <h2>Personal Custom Dictionary</h2>
+        <p class="section-desc">Add custom names, jargon, or company terms so they won't be flagged as spelling errors.</p>
+
+        <div class="dict-input-row">
+          <input type="text" id="dict-word-input" class="form-control" placeholder="Enter word to add (e.g. Kubernetes, Subagent, Canva)...">
+          <button id="btn-add-word" class="btn primary">Add Word</button>
+        </div>
+
+        <div class="dictionary-chips" id="dict-chips-container">
+          <!-- Dynamically populated -->
+        </div>
+      </section>
+
+      <!-- Section: AI Engine & Cloud API -->
+      <section class="settings-section" id="section-ai-engine">
+        <h2>AI Engine & Cloud API</h2>
+        <p class="section-desc">By default, Grammarly AI runs 100% offline with zero latency. You can optionally connect your OpenAI, OpenRouter, or Groq API key for advanced generative LLM rewrites.</p>
+
+        <div class="form-group">
+          <label for="select-ai-provider">AI Provider</label>
+          <select id="select-ai-provider" class="form-control">
+            <option value="offline">Built-in High Performance Engine (100% Offline, Instant, Zero API Key)</option>
+            <option value="openai">OpenAI (GPT-4o mini / GPT-4o)</option>
+            <option value="groq">Groq (Ultra-fast Llama 3.1 / Mixtral)</option>
+            <option value="openrouter">OpenRouter (Universal AI Gateway)</option>
+          </select>
+        </div>
+
+        <div id="cloud-api-fields" style="display: none;">
+          <div class="form-group">
+            <label for="input-api-key">API Key</label>
+            <div class="input-with-icon">
+              <input type="password" id="input-api-key" class="form-control" placeholder="sk-...">
+              <button type="button" id="btn-toggle-key" class="icon-toggle">👁️</button>
+            </div>
+            <span class="field-hint">Your API key is securely stored in your browser's local sync storage and never shared.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="input-api-model">Model Name</label>
+            <input type="text" id="input-api-model" class="form-control" value="gpt-4o-mini">
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Excluded Domains -->
+      <section class="settings-section" id="section-exclusions">
+        <h2>Excluded Domains</h2>
+        <p class="section-desc">Specify domain names where the assistant should remain inactive.</p>
+
+        <div class="dict-input-row">
+          <input type="text" id="domain-input" class="form-control" placeholder="e.g. banking.com, internal.corp...">
+          <button id="btn-add-domain" class="btn primary">Add Domain</button>
+        </div>
+
+        <div class="dictionary-chips" id="domain-chips-container">
+          <!-- Dynamically populated -->
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="toast">Settings saved successfully!</div>
+
+  <script src="options.js"></script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+/* AdBlock Pro - Universal Cosmetic Filtering Rules */
+/* Active only when protection is ON and site is NOT whitelisted */
+
+:root:not([data-adblock-pro-disabled="true"]) ins.adsbygoogle,
+:root:not([data-adblock-pro-disabled="true"]) [id^="google_ads_iframe"],
+:root:not([data-adblock-pro-disabled="true"]) [id^="div-gpt-ad"],
+:root:not([data-adblock-pro-disabled="true"]) [id*="google_ads_"],
+:root:not([data-adblock-pro-disabled="true"]) [class*="google-ads"],
+:root:not([data-adblock-pro-disabled="true"]) [class*="adsbygoogle"],
+:root:not([data-adblock-pro-disabled="true"]) div[data-google-query-id],
+:root:not([data-adblock-pro-disabled="true"]) div[data-ad-client],
+:root:not([data-adblock-pro-disabled="true"]) div[data-ad-slot],
+:root:not([data-adblock-pro-disabled="true"]) div[data-ad-unit],
+:root:not([data-adblock-pro-disabled="true"]) div[data-ad-zone],
+:root:not([data-adblock-pro-disabled="true"]) div[data-dfp-ad],
+:root:not([data-adblock-pro-disabled="true"]) .dfp-ad-unit,
+:root:not([data-adblock-pro-disabled="true"]) .dfp-ad,
+
+/* Generic Ad containers and banners */
+:root:not([data-adblock-pro-disabled="true"]) .ad-container,
+:root:not([data-adblock-pro-disabled="true"]) .ad-wrapper,
+:root:not([data-adblock-pro-disabled="true"]) .ad-banner,
+:root:not([data-adblock-pro-disabled="true"]) .ad-banner-container,
+:root:not([data-adblock-pro-disabled="true"]) .ad-placeholder,
+:root:not([data-adblock-pro-disabled="true"]) .ad-slot,
+:root:not([data-adblock-pro-disabled="true"]) .ad-unit,
+:root:not([data-adblock-pro-disabled="true"]) .ad-box,
+:root:not([data-adblock-pro-disabled="true"]) .ad-header,
+:root:not([data-adblock-pro-disabled="true"]) .ad-footer,
+:root:not([data-adblock-pro-disabled="true"]) .ad-sidebar,
+:root:not([data-adblock-pro-disabled="true"]) .sticky-ad,
+:root:not([data-adblock-pro-disabled="true"]) .sticky-ad-bar,
+:root:not([data-adblock-pro-disabled="true"]) .floating-ad,
+:root:not([data-adblock-pro-disabled="true"]) .floating-banner,
+:root:not([data-adblock-pro-disabled="true"]) .bottom-ad-bar,
+:root:not([data-adblock-pro-disabled="true"]) .top-ad-bar,
+:root:not([data-adblock-pro-disabled="true"]) .ad-leaderboard,
+:root:not([data-adblock-pro-disabled="true"]) .ad-billboard,
+:root:not([data-adblock-pro-disabled="true"]) .ad-skyscraper,
+:root:not([data-adblock-pro-disabled="true"]) .ad-rectangle,
+:root:not([data-adblock-pro-disabled="true"]) .ad_wrapper,
+:root:not([data-adblock-pro-disabled="true"]) .ad_slot,
+:root:not([data-adblock-pro-disabled="true"]) .ad_container,
+:root:not([data-adblock-pro-disabled="true"]) .ad_unit,
+:root:not([data-adblock-pro-disabled="true"]) .ads-holder,
+:root:not([data-adblock-pro-disabled="true"]) .ads-placement,
+:root:not([data-adblock-pro-disabled="true"]) .advertisement,
+:root:not([data-adblock-pro-disabled="true"]) .advertisement-box,
+:root:not([data-adblock-pro-disabled="true"]) .advertisement-label,
+:root:not([data-adblock-pro-disabled="true"]) .advert-box,
+:root:not([data-adblock-pro-disabled="true"]) .advert-container,
+:root:not([data-adblock-pro-disabled="true"]) .advert-banner,
+:root:not([data-adblock-pro-disabled="true"]) .native-ad-unit,
+:root:not([data-adblock-pro-disabled="true"]) .sponsored-unit,
+:root:not([data-adblock-pro-disabled="true"]) .sponsored-ad,
+:root:not([data-adblock-pro-disabled="true"]) .sponsored-post,
+:root:not([data-adblock-pro-disabled="true"]) .sponsored-content,
+:root:not([data-adblock-pro-disabled="true"]) .sponsored-links,
+:root:not([data-adblock-pro-disabled="true"]) .sponsored-articles,
+:root:not([data-adblock-pro-disabled="true"]) .promoted-content,
+:root:not([data-adblock-pro-disabled="true"]) .promoted-post,
+:root:not([data-adblock-pro-disabled="true"]) .sponsor-banner,
+
+/* Content recommendation widgets (Taboola, Outbrain, Revcontent, MGID) */
+:root:not([data-adblock-pro-disabled="true"]) .taboola-placeholder,
+:root:not([data-adblock-pro-disabled="true"]) #taboola-below-article-thumbnails,
+:root:not([data-adblock-pro-disabled="true"]) #taboola-right-rail-thumbnails,
+:root:not([data-adblock-pro-disabled="true"]) div[id*="taboola-"],
+:root:not([data-adblock-pro-disabled="true"]) div[class*="taboola-"],
+:root:not([data-adblock-pro-disabled="true"]) .trc_related_container,
+:root:not([data-adblock-pro-disabled="true"]) .trc_rbox_container,
+:root:not([data-adblock-pro-disabled="true"]) .outbrain,
+:root:not([data-adblock-pro-disabled="true"]) .OUTBRAIN,
+:root:not([data-adblock-pro-disabled="true"]) .ob-widget,
+:root:not([data-adblock-pro-disabled="true"]) .ob-smartfeed-wrapper,
+:root:not([data-adblock-pro-disabled="true"]) div[id*="outbrain_"],
+:root:not([data-adblock-pro-disabled="true"]) .rc-item,
+:root:not([data-adblock-pro-disabled="true"]) .rc-container,
+:root:not([data-adblock-pro-disabled="true"]) .revcontent,
+:root:not([data-adblock-pro-disabled="true"]) .mgbox,
+:root:not([data-adblock-pro-disabled="true"]) div[class*="mgid_"],
+:root:not([data-adblock-pro-disabled="true"]) #zergnet-widget,
+:root:not([data-adblock-pro-disabled="true"]) .zergnet-widget,
+
+/* Ad iframes */
+:root:not([data-adblock-pro-disabled="true"]) iframe[id^="google_ads_"],
+:root:not([data-adblock-pro-disabled="true"]) iframe[name^="google_ads_"],
+:root:not([data-adblock-pro-disabled="true"]) iframe[src*="doubleclick.net"],
+:root:not([data-adblock-pro-disabled="true"]) iframe[src*="googlesyndication.com"],
+:root:not([data-adblock-pro-disabled="true"]) iframe[src*="googleadservices.com"],
+:root:not([data-adblock-pro-disabled="true"]) iframe[src*="criteo.com"],
+:root:not([data-adblock-pro-disabled="true"]) iframe[src*="amazon-adsystem.com"],
+:root:not([data-adblock-pro-disabled="true"]) iframe[src*="media.net"],
+:root:not([data-adblock-pro-disabled="true"]) iframe[src*="smartadserver.com"],
+:root:not([data-adblock-pro-disabled="true"]) iframe[src*="adnxs.com"],
+:root:not([data-adblock-pro-disabled="true"]) iframe[src*="rubiconproject.com"],
+:root:not([data-adblock-pro-disabled="true"]) iframe[src*="pubmatic.com"],
+:root:not([data-adblock-pro-disabled="true"]) iframe[src*="openx.net"],
+
+/* Video Ads & YouTube In-Feed / Overlay Ads */
+:root:not([data-adblock-pro-disabled="true"]) .ytp-ad-module,
+:root:not([data-adblock-pro-disabled="true"]) .ytp-ad-overlay-container,
+:root:not([data-adblock-pro-disabled="true"]) .ytp-ad-overlay-slot,
+:root:not([data-adblock-pro-disabled="true"]) .ytp-ad-player-overlay,
+:root:not([data-adblock-pro-disabled="true"]) .ytp-ad-text,
+:root:not([data-adblock-pro-disabled="true"]) .ytp-ad-preview-container,
+:root:not([data-adblock-pro-disabled="true"]) .video-ads,
+:root:not([data-adblock-pro-disabled="true"]) #player-ads,
+:root:not([data-adblock-pro-disabled="true"]) ytd-promoted-sparkles-web-renderer,
+:root:not([data-adblock-pro-disabled="true"]) ytd-promoted-video-renderer,
+:root:not([data-adblock-pro-disabled="true"]) ytd-ad-slot-renderer,
+:root:not([data-adblock-pro-disabled="true"]) ytd-in-feed-ad-layout-renderer,
+:root:not([data-adblock-pro-disabled="true"]) ytd-banner-promo-renderer,
+:root:not([data-adblock-pro-disabled="true"]) ytd-display-ad-renderer,
+:root:not([data-adblock-pro-disabled="true"]) ytd-statement-banner-renderer,
+:root:not([data-adblock-pro-disabled="true"]) #masthead-ad,
+:root:not([data-adblock-pro-disabled="true"]) #panels-ad,
+:root:not([data-adblock-pro-disabled="true"]) ytd-mealbar-promo-renderer {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  width: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+}

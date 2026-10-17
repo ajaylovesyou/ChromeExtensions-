@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdBlock Pro - Settings & Whitelist</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="logo">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <h1>AdBlock Pro <span class="tag">Settings</span></h1>
+      </div>
+      <p class="subtitle">Customize blocking engines, managed whitelist domains, and general extension preferences.</p>
+    </header>
+
+    <!-- Settings Sections -->
+    <main class="content">
+      <!-- Whitelist Manager -->
+      <section class="card">
+        <div class="card-header">
+          <h2>🌐 Whitelisted Websites</h2>
+          <p>Websites on this list will bypass all ad blocking and cosmetic filters.</p>
+        </div>
+        
+        <div class="add-whitelist-bar">
+          <input type="text" id="newDomainInput" placeholder="e.g. example.com or nytimes.com">
+          <button id="addDomainBtn" class="btn primary">Add Website</button>
+        </div>
+
+        <div class="whitelist-container">
+          <ul id="whitelistUl" class="domain-list">
+            <!-- Dynamic items -->
+          </ul>
+          <div id="emptyWhitelistNotice" class="empty-notice">No websites whitelisted. AdBlock Pro is protecting all sites.</div>
+        </div>
+      </section>
+
+      <!-- Protection Shields -->
+      <section class="card">
+        <div class="card-header">
+          <h2>🛡️ Protection Engines</h2>
+          <p>Fine-tune which ad blocking engines are enabled.</p>
+        </div>
+
+        <div class="settings-list">
+          <div class="setting-item">
+            <div class="setting-text">
+              <strong>Declarative Network Blocker (MV3)</strong>
+              <span>Stops ads and tracking requests before they ever download.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="shieldNetwork" checked disabled>
+              <span class="slider round"></span>
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-text">
+              <strong>Cosmetic Element Filtering</strong>
+              <span>Collapses blank spaces, banners, and empty ad boxes.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="shieldCosmetic" checked>
+              <span class="slider round"></span>
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-text">
+              <strong>Video Ad Auto-Skipper</strong>
+              <span>Fast-forwards and auto-skips video advertisements.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="shieldVideo" checked>
+              <span class="slider round"></span>
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-text">
+              <strong>Anti-Adblock Modal Defuser</strong>
+              <span>Removes overlay nag screens asking you to turn off adblock.</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="shieldAntiAdblock" checked>
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- Statistics & Data -->
+      <section class="card">
+        <div class="card-header">
+          <h2>📊 Statistics & Storage</h2>
+          <p>Manage all-time metrics saved locally in your browser.</p>
+        </div>
+
+        <div class="stats-summary">
+          <div class="stat-box">
+            <span class="val" id="totalBlockedAllTime">0</span>
+            <span class="lbl">Total Ads & Trackers Blocked</span>
+          </div>
+          <button id="resetStatsBtn" class="btn danger">Reset Statistics</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>AdBlock Pro Manifest V3 &bull; Private &bull; 0 Data Collection</span>
+    </footer>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
