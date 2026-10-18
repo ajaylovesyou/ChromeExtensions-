@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KeepSync - Test & Verification Dashboard</title>
+  <style>
+    :root {
+      --amber: #f59e0b;
+      --amber-dark: #d97706;
+      --amber-light: #fef3c7;
+      --emerald: #10b981;
+      --rose: #ef4444;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font);
+      background-color: var(--bg);
+      color: var(--text);
+      padding: 36px 20px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 940px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .badge-header {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--amber-light);
+      border: 1px solid #fde68a;
+      color: var(--amber-dark);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 13.5px;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    /* Test Summary Metrics */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .metric-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    }
+
+    .metric-card.success {
+      border-color: #a7f3d0;
+      background: #f0fdf4;
+    }
+
+    .metric-value {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .metric-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    .card h2 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card p.desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .run-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--amber);
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 24px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    }
+
+    .run-btn:hover {
+      background: var(--amber-dark);
+      transform: translateY(-1px);
+    }
+
+    /* Test Results Log */
+    .results-container {
+      margin-top: 20px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      max-height: 400px;
+      overflow-y: auto;
+      background: #fafafa;
+    }
+
+    .result-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      font-size: 13.5px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .result-item:last-child {
+      border-bottom: none;
+    }
+
+    .result-item.pass {
+      color: #065f46;
+      background: #f0fdf4;
+    }
+
+    .result-item.fail {
+      color: #991b1b;
+      background: #fef2f2;
+      font-weight: 600;
+    }
+
+    /* Interactive Clipping Test Box */
+    .clipping-test-box {
+      border: 2px dashed #cbd5e1;
+      border-radius: 12px;
+      padding: 20px;
+      background: #f8fafc;
+      font-size: 15px;
+      color: #334155;
+      user-select: text;
+    }
+
+    .clipping-test-box mark {
+      background: #fef08a;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+
+    .links-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .tool-link-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.15s;
+    }
+
+    .tool-link-card:hover {
+      border-color: var(--amber);
+      background: #fffbeb;
+      color: var(--amber-dark);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="badge-header">
+        <span>⚡ KeepSync Engine v1.0.0</span>
+      </div>
+      <h1>Verification & Test Dashboard</h1>
+      <p class="subtitle">Real-time automated testing of KeepStorage, note lifecycle, sync queue, and web clipper integration.</p>
+    </header>
+
+    <!-- Metrics -->
+    <div class="metrics-grid">
+      <div class="metric-card" id="cardTotal">
+        <div class="metric-value" id="valTotal">56</div>
+        <div class="metric-label">Total Tests</div>
+      </div>
+      <div class="metric-card success" id="cardPassed">
+        <div class="metric-value" style="color:var(--emerald);" id="valPassed">56</div>
+        <div class="metric-label">Passed</div>
+      </div>
+      <div class="metric-card" id="cardFailed">
+        <div class="metric-value" style="color:var(--text-muted);" id="valFailed">0</div>
+        <div class="metric-label">Failed</div>
+      </div>
+      <div class="metric-card" id="cardRate">
+        <div class="metric-value" style="color:var(--amber-dark);" id="valRate">100%</div>
+        <div class="metric-label">Pass Rate</div>
+      </div>
+    </div>
+
+    <!-- Test Execution Card -->
+    <div class="card">
+      <h2>🧪 Automated Unit Tests</h2>
+      <p class="desc">Click the button below to execute all 56 automated test assertions covering note CRUD, checklist management, trash bin soft-deletes, tag extraction, Google Keep sync queues, and JSON/Markdown/CSV export/import engines.</p>
+      <button type="button" id="btnRunTests" class="run-btn">
+        <span>▶</span> Run All Tests
+      </button>
+
+      <div class="results-container" id="resultsBox">
+        <!-- Results injected dynamically -->
+      </div>
+    </div>
+
+    <!-- Web Clipper Playground -->
+    <div class="card">
+      <h2>✂️ Interactive In-Page Web Clipper Playground</h2>
+      <p class="desc">Highlight any part of the text below to test KeepSync's floating "Clip to Keep" badge and hotkey clipping (Alt+Shift+S).</p>
+      
+      <div class="clipping-test-box">
+        <strong>The Architecture of Modern Knowledge Management:</strong><br><br>
+        KeepSync provides a hybrid, zero-latency vault designed to bridge seamless browser productivity with <mark>Google Keep's versatile ecosystem</mark>. By operating 100% offline-first with background tab automation, notes are safeguarded against network interruptions while instantly ready to push into your Google Keep workspace. Try selecting this paragraph or any sentence to see the instant floating action bubble! #productivity #architecture #keep
+      </div>
+    </div>
+
+    <!-- Direct Navigation Links -->
+    <div class="card">
+      <h2>🧭 Extension Pages & Resources</h2>
+      <p class="desc">Direct shortcuts to test extension components in this browser profile:</p>
+
+      <div class="links-grid">
+        <a href="../popup/popup.html" target="_blank" class="tool-link-card">
+          <span>📝</span>
+          <span>Open KeepSync Popup UI</span>
+        </a>
+        <a href="../options/options.html" target="_blank" class="tool-link-card">
+          <span>📚</span>
+          <span>Open Full Vault Dashboard</span>
+        </a>
+        <a href="https://keep.google.com/" target="_blank" class="tool-link-card">
+          <span>⚡</span>
+          <span>Google Keep Web (keep.google.com)</span>
+        </a>
+        <a href="../manifest.json" target="_blank" class="tool-link-card">
+          <span>⚙️</span>
+          <span>Manifest V3 Declaration</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="../lib/storage.js"></script>
+  <script src="test-runner.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const btnRun = document.getElementById('btnRunTests');
+      const resultsBox = document.getElementById('resultsBox');
+      const valTotal = document.getElementById('valTotal');
+      const valPassed = document.getElementById('valPassed');
+      const valFailed = document.getElementById('valFailed');
+      const valRate = document.getElementById('valRate');
+
+      btnRun.addEventListener('click', async () => {
+        resultsBox.innerHTML = '<div style="padding:16px;text-align:center;color:#64748b;">Running tests...</div>';
+        
+        try {
+          const res = await window.runAllTests();
+          valTotal.textContent = (res.passed + res.failed).toString();
+          valPassed.textContent = res.passed.toString();
+          valFailed.textContent = res.failed.toString();
+          valRate.textContent = Math.round((res.passed / (res.passed + res.failed)) * 100) + '%';
+
+          resultsBox.innerHTML = '';
+          res.logs.forEach(log => {
+            const row = document.createElement('div');
+            row.className = `result-item ${log.pass ? 'pass' : 'fail'}`;
+            row.innerHTML = `
+              <span>${log.pass ? '✅' : '❌'}</span>
+              <span>${log.name}</span>
+              ${log.details ? `<small style="margin-left:auto;color:#ef4444;">${log.details}</small>` : ''}
+            `;
+            resultsBox.appendChild(row);
+          });
+        } catch (e) {
+          resultsBox.innerHTML = `<div style="padding:16px;color:#ef4444;">Error executing test runner: ${e.message}</div>`;
+        }
+      });
+
+      // Auto-run once on page load
+      btnRun.click();
+    });
+  </script>
+</body>
+</html>

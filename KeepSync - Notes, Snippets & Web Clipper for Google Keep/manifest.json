@@ -1,0 +1,90 @@
+{
+  "manifest_version": 3,
+  "name": "KeepSync - Notes, Snippets & Web Clipper for Google Keep",
+  "short_name": "KeepSync",
+  "version": "1.0.0",
+  "description": "Capture notes, web snippets, links, and checklists permanently to your offline-ready vault and automatically sync them to Google Keep.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "contextMenus",
+    "clipboardWrite",
+    "scripting",
+    "alarms",
+    "notifications"
+  ],
+  "omnibox": {
+    "keyword": "ks"
+  },
+  "host_permissions": [
+    "https://keep.google.com/*"
+  ],
+  "background": {
+    "service_worker": "background/service-worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "exclude_matches": [
+        "https://keep.google.com/*"
+      ],
+      "js": [
+        "content/webpage-clipper.js"
+      ],
+      "css": [
+        "content/webpage-clipper.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://keep.google.com/*"
+      ],
+      "js": [
+        "content/keep-injector.js"
+      ],
+      "css": [
+        "content/keep-injector.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_title": "KeepSync - Save Notes & Snippets to Google Keep"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+K",
+        "mac": "Alt+Shift+K"
+      },
+      "description": "Open KeepSync Quick Note popup"
+    },
+    "quick_clip_selection": {
+      "suggested_key": {
+        "default": "Alt+Shift+S",
+        "mac": "Alt+Shift+S"
+      },
+      "description": "Instantly clip selected text or page to KeepSync"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

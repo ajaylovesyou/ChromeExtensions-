@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KeepSync</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body class="theme-system">
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-logo">
+          <svg viewBox="0 0 24 24" width="22" height="22">
+            <path fill="#f59e0b" d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6A4.997 4.997 0 0 1 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"/>
+          </svg>
+        </div>
+        <div class="brand-info">
+          <h1 class="brand-title">KeepSync</h1>
+          <span class="brand-status" id="headerStatus">Vault Ready</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button id="btnOpenKeep" class="icon-btn" title="Open Google Keep Web (keep.google.com)">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+        </button>
+        <button id="btnOpenDashboard" class="icon-btn" title="Open Full Notes Manager">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z"/></svg>
+        </button>
+        <button id="btnThemeToggle" class="icon-btn" title="Toggle Theme">
+          <svg class="sun-icon" viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+      <button class="nav-tab active" data-tab="create">
+        <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+        <span>New Note</span>
+      </button>
+      <button class="nav-tab" data-tab="vault">
+        <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
+        <span>Vault</span>
+        <span class="tab-badge" id="vaultCountBadge">0</span>
+      </button>
+      <button class="nav-tab" data-tab="trash">
+        <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+        <span>Trash</span>
+        <span class="tab-badge trash-badge" id="trashCountBadge">0</span>
+      </button>
+      <button class="nav-tab" data-tab="settings">
+        <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+        <span>Tools</span>
+      </button>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="app-main">
+      <!-- TAB 1: CREATE NOTE / CLIP -->
+      <section id="tab-create" class="tab-pane active">
+        <!-- Type Selection -->
+        <div class="note-type-selector">
+          <button type="button" class="type-pill active" data-type="note">
+            <span class="pill-icon">📝</span> Note
+          </button>
+          <button type="button" class="type-pill" data-type="snippet">
+            <span class="pill-icon">✂️</span> Snippet
+          </button>
+          <button type="button" class="type-pill" data-type="link">
+            <span class="pill-icon">🔗</span> Web Link
+          </button>
+          <button type="button" class="type-pill" data-type="checklist">
+            <span class="pill-icon">☑️</span> Checklist
+          </button>
+        </div>
+
+        <!-- Webpage Context Banner (collapsible) -->
+        <div class="page-context-box" id="pageContextBox">
+          <img id="ctxFavicon" class="ctx-favicon" src="" alt="" style="display:none;">
+          <div class="ctx-details">
+            <div class="ctx-title" id="ctxPageTitle">Loading page info...</div>
+            <div class="ctx-url" id="ctxPageUrl"></div>
+          </div>
+          <div class="ctx-actions-cluster">
+            <button type="button" id="btnUsePageInfo" class="ctx-action-btn" title="Include link and title">
+              Attach Link
+            </button>
+            <button type="button" id="btnClipFullArticle" class="ctx-action-btn primary" title="Extract clean readable article body into note">
+              📄 Reader Clip
+            </button>
+          </div>
+        </div>
+
+        <!-- Note Editor Card -->
+        <div class="editor-card" id="editorCard">
+          <div class="editor-header">
+            <input type="text" id="noteTitle" class="editor-title-input" placeholder="Title..." maxlength="200" autocomplete="off">
+            <button type="button" id="btnPinToggle" class="pin-toggle-btn" title="Pin note to top">
+              <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M16 9V4l1 0c.55 0 1-.45 1-1s-.45-1-1-1H7c-.55 0-1 .45-1 1s.45 1 1 1l1 0v5c0 1.66-1.34 3-3 3v2h5.97v7l1 1 1-1v-7H19v-2c-1.66 0-3-1.34-3-3z"/></svg>
+            </button>
+          </div>
+
+          <!-- Smart AI & Quick Transformation Utilities -->
+          <div class="smart-tools-bar">
+            <button type="button" id="btnVoiceDictation" class="tool-chip voice-tool" title="Dictate note hands-free (Voice-to-Text)">
+              <svg viewBox="0 0 24 24" width="12" height="12"><path fill="currentColor" d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.91-3c-.49 0-.9.36-.98.85C16.52 14.2 14.47 16 12 16s-4.52-1.8-4.93-4.15c-.08-.49-.49-.85-.98-.85-.61 0-1.09.54-1 1.14.49 3 2.89 5.35 5.91 5.78V20c0 .55.45 1 1 1s1-.45 1-1v-2.08c3.02-.43 5.42-2.78 5.91-5.78.1-.6-.39-1.14-1-1.14z"/></svg>
+              <span id="voiceStatusText">Voice</span>
+            </button>
+            <button type="button" id="btnSummarizeBullets" class="tool-chip" title="Condense note or snippet into key takeaway bullets">
+              <span>⚡ Bullets</span>
+            </button>
+            <button type="button" id="btnExtractActionItems" class="tool-chip" title="Extract actionable tasks into an interactive checklist">
+              <span>☑️ Tasks</span>
+            </button>
+            <button type="button" id="btnFormatCode" class="tool-chip" title="Format and indent code inside markdown block">
+              <span>💻 Code</span>
+            </button>
+            <!-- Reminder Picker Dropdown -->
+            <div class="reminder-dropdown-wrapper">
+              <button type="button" id="btnReminderToggle" class="tool-chip reminder-tool" title="Set a reminder alarm for this note">
+                <span>⏰</span>
+                <span id="reminderBtnLabel">Reminder</span>
+              </button>
+              <div id="reminderDropdownMenu" class="reminder-menu" style="display: none;">
+                <div class="reminder-option" data-time="none">❌ Remove reminder</div>
+                <div class="reminder-option" data-time="today_evening">🌆 Later Today (6:00 PM)</div>
+                <div class="reminder-option" data-time="tomorrow_morning">🌅 Tomorrow (9:00 AM)</div>
+                <div class="reminder-option" data-time="in_2_days">📅 In 2 Days</div>
+                <div class="reminder-option" data-time="next_week">🗓️ Next Week</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Text Note & Snippet Body -->
+          <div id="textEditorArea" class="editor-body-container">
+            <textarea id="noteContent" class="editor-content-input" placeholder="Take a note, type details, or paste snippet..."></textarea>
+          </div>
+
+          <!-- Checklist Builder Area (shown when type is checklist) -->
+          <div id="checklistEditorArea" class="checklist-builder" style="display: none;">
+            <div class="checklist-items" id="checklistItemsList">
+              <!-- Dynamically populated checklist items -->
+            </div>
+            <div class="checklist-add-row">
+              <span class="checklist-add-icon">+</span>
+              <input type="text" id="checklistNewInput" class="checklist-add-input" placeholder="List item (press Enter to add)...">
+            </div>
+          </div>
+
+          <!-- Attached Source URL Box (optional) -->
+          <div id="attachedUrlRow" class="attached-url-row" style="display: none;">
+            <svg viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>
+            <span id="attachedUrlText" class="attached-url-text"></span>
+            <button type="button" id="btnRemoveAttachedUrl" class="remove-btn" title="Remove URL">&times;</button>
+          </div>
+
+          <!-- Tags Input & Chips -->
+          <div class="tags-container">
+            <div class="tags-chips-list" id="tagsChipsList"></div>
+            <input type="text" id="tagInput" class="tag-input" placeholder="Add tag (e.g. #work, #idea)...">
+          </div>
+
+          <!-- Color Palette Picker -->
+          <div class="color-palette-bar">
+            <span class="palette-label">Color:</span>
+            <div class="color-swatches" id="colorSwatchesContainer">
+              <!-- Dynamically injected swatches matching Keep's 12 colors -->
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="editor-actions">
+            <button type="button" id="btnCopyNote" class="secondary-btn" title="Copy to clipboard">
+              <svg viewBox="0 0 24 24" width="15" height="15"><path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+              <span>Copy</span>
+            </button>
+
+            <div class="primary-actions-group">
+              <button type="button" id="btnSavePermanent" class="primary-btn" title="Save note permanently to local vault">
+                <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
+                <span>Save Vault</span>
+              </button>
+
+              <button type="button" id="btnSaveAndSyncKeep" class="keep-sync-btn" title="Save locally AND automatically inject into Google Keep">
+                <svg viewBox="0 0 24 24" width="16" height="16">
+                  <path fill="#f59e0b" d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6A4.997 4.997 0 0 1 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"/>
+                </svg>
+                <span>Save & Sync Keep</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: VAULT (SEARCH & SAVED NOTES) -->
+      <section id="tab-vault" class="tab-pane">
+        <!-- Search and Filter Toolbar -->
+        <div class="vault-toolbar">
+          <div class="search-box">
+            <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            <input type="text" id="vaultSearchInput" placeholder="Search notes, links, snippets, tags..." autocomplete="off">
+            <button type="button" id="btnClearSearch" class="clear-search-btn" style="display: none;">&times;</button>
+          </div>
+
+          <!-- View Layout & Sync All -->
+          <div class="vault-tool-actions">
+            <button type="button" id="btnSyncAllToKeep" class="small-tool-btn" title="Sync all pending notes to Google Keep">
+              ⚡ Sync All
+            </button>
+            <button type="button" id="btnToggleLayout" class="icon-tool-btn" title="Toggle Grid / List View">
+              <svg id="layoutIcon" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M4 11h5V5H4v6zm0 7h5v-6H4v6zm6 0h5v-6h-5v6zm6 0h5v-6h-5v6zm-6-7h5V5h-5v6zm6-6v6h5V5h-5z"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter Chips -->
+        <div class="filter-chips-row">
+          <button class="filter-chip active" data-filter="all">All</button>
+          <button class="filter-chip" data-filter="pinned">📌 Pinned</button>
+          <button class="filter-chip" data-filter="reminder">⏰ Reminders</button>
+          <button class="filter-chip" data-filter="snippet">✂️ Snippets</button>
+          <button class="filter-chip" data-filter="link">🔗 Links</button>
+          <button class="filter-chip" data-filter="checklist">☑️ Lists</button>
+          <button class="filter-chip" data-filter="note">📝 Notes</button>
+        </div>
+
+        <!-- Notes Stream Container -->
+        <div class="notes-stream" id="vaultNotesStream">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="vaultEmptyState" style="display: none;">
+          <div class="empty-illustration">💡</div>
+          <h3 class="empty-title">No notes found</h3>
+          <p class="empty-desc">Save web links, snippets, or notes from the "New Note" tab, or select text on any webpage to clip!</p>
+        </div>
+      </section>
+
+      <!-- TAB 3: TRASH (DELETE MANAGEMENT) -->
+      <section id="tab-trash" class="tab-pane">
+        <div class="trash-header-bar">
+          <div class="trash-title-group">
+            <h2 class="trash-heading">Trash Bin</h2>
+            <span class="trash-subtext" id="trashSubtext">0 notes in trash</span>
+          </div>
+          <button type="button" id="btnEmptyTrash" class="empty-trash-btn" title="Permanently delete all notes in trash">
+            <svg viewBox="0 0 24 24" width="15" height="15"><path fill="currentColor" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+            <span>Empty Trash</span>
+          </button>
+        </div>
+
+        <div class="trash-notes-stream" id="trashNotesStream">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <div class="empty-state" id="trashEmptyState" style="display: none;">
+          <div class="empty-illustration">🗑️</div>
+          <h3 class="empty-title">Trash is empty</h3>
+          <p class="empty-desc">Deleted notes move here first so you can restore them or permanently remove them whenever you want.</p>
+        </div>
+      </section>
+
+      <!-- TAB 4: SETTINGS & TOOLS -->
+      <section id="tab-settings" class="tab-pane">
+        <div class="settings-group">
+          <h3 class="settings-group-title">Cloud & Automation</h3>
+
+          <div class="setting-item">
+            <div class="setting-text">
+              <span class="setting-label">Floating Clip Badge</span>
+              <span class="setting-hint">Show "Clip to Keep" bubble when selecting text on any webpage</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="settingFloatingBadge">
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-text">
+              <span class="setting-label">Auto-Push to Google Keep</span>
+              <span class="setting-hint">Automatically launch keep.google.com and inject note whenever saved</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="settingAutoSync">
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-text">
+              <span class="setting-label">Keep in Background</span>
+              <span class="setting-hint">Open Google Keep in an inactive background tab instead of focusing it</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="settingKeepBackground">
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-text">
+              <span class="setting-label">Badge Counter</span>
+              <span class="setting-hint">Display active saved notes count on extension icon</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="settingBadgeCount">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="settings-group">
+          <h3 class="settings-group-title">Backup & Export</h3>
+
+          <div class="export-buttons-grid">
+            <button type="button" id="btnExportJson" class="export-btn">
+              <span class="export-icon">💾</span>
+              <div class="export-label">
+                <strong>JSON Backup</strong>
+                <small>Full restore file</small>
+              </div>
+            </button>
+
+            <button type="button" id="btnExportMarkdown" class="export-btn">
+              <span class="export-icon">📑</span>
+              <div class="export-label">
+                <strong>Markdown (.md)</strong>
+                <small>Formatted text</small>
+              </div>
+            </button>
+
+            <button type="button" id="btnExportCsv" class="export-btn">
+              <span class="export-icon">📊</span>
+              <div class="export-label">
+                <strong>Spreadsheet (.csv)</strong>
+                <small>Excel / Sheets</small>
+              </div>
+            </button>
+
+            <button type="button" id="btnImportJson" class="export-btn">
+              <span class="export-icon">📥</span>
+              <div class="export-label">
+                <strong>Restore Backup</strong>
+                <small>Import JSON file</small>
+              </div>
+            </button>
+            <input type="file" id="importFileInput" accept=".json" style="display: none;">
+          </div>
+        </div>
+
+        <div class="settings-group">
+          <h3 class="settings-group-title">Shortcuts & Info</h3>
+          <div class="shortcuts-list">
+            <div class="shortcut-item">
+              <span>Open Extension Popup</span>
+              <kbd>Alt + Shift + K</kbd>
+            </div>
+            <div class="shortcut-item">
+              <span>Quick Clip Selection / Page</span>
+              <kbd>Alt + Shift + S</kbd>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Global Toast Alert in Popup -->
+    <div id="popupToast" class="popup-toast" style="display: none;">
+      <span id="popupToastMsg"></span>
+    </div>
+
+    <!-- Edit Note Modal Dialog -->
+    <div id="editNoteModal" class="modal-backdrop" style="display: none;">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3 class="modal-title">Edit Note</h3>
+          <button type="button" id="btnCloseEditModal" class="close-modal-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="editNoteId">
+          <input type="text" id="editNoteTitle" class="editor-title-input" placeholder="Title...">
+          <textarea id="editNoteContent" class="editor-content-input modal-textarea" placeholder="Note content..."></textarea>
+          
+          <div class="modal-color-picker">
+            <span class="palette-label">Color:</span>
+            <div class="color-swatches" id="editColorSwatches"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="btnCancelEdit" class="secondary-btn">Cancel</button>
+          <button type="button" id="btnSaveEdit" class="primary-btn">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../lib/storage.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
