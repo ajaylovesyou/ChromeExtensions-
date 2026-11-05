@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DarkShift Pro</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">DarkShift<span class="brand-pro">PRO</span></span>
+          <span class="brand-desc">Universal Dark Theme</span>
+        </div>
+      </div>
+      <button id="openOptionsBtn" class="icon-btn" title="Open Settings Dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Master Switch Hero -->
+    <section class="master-hero">
+      <button id="masterPowerBtn" class="power-ring active" title="Toggle Universal Dark Theme">
+        <div class="power-inner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+            <line x1="12" y1="2" x2="12" y2="12"></line>
+          </svg>
+        </div>
+      </button>
+      <div id="masterStatusLabel" class="master-status">Universal Dark Active</div>
+      <div id="masterSubLabel" class="master-sub">Applying comfort theme across websites</div>
+    </section>
+
+    <!-- Current Website Card -->
+    <section class="site-card">
+      <div class="site-meta">
+        <div class="site-icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+        </div>
+        <div class="site-details">
+          <span id="currentDomain" class="site-domain">Loading...</span>
+          <span id="siteStatusText" class="site-state">Enabled on this site</span>
+        </div>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="siteToggle" checked>
+        <span class="slider"></span>
+      </label>
+    </section>
+
+    <!-- Theme Engine Selector -->
+    <div class="section-title">Theme Engine</div>
+    <div class="engine-tabs">
+      <button class="engine-btn active" data-engine="smart-invert" title="Universal inverted dark mode with media protection">
+        <span class="engine-emoji">🌟</span>
+        <span class="engine-name">Smart Invert</span>
+      </button>
+      <button class="engine-btn" data-engine="dynamic-dark" title="Modern charcoal stylesheet styling">
+        <span class="engine-emoji">🎨</span>
+        <span class="engine-name">Dynamic</span>
+      </button>
+      <button class="engine-btn" data-engine="oled-dark" title="Pure #000000 black for OLED screens">
+        <span class="engine-emoji">🖤</span>
+        <span class="engine-name">OLED Black</span>
+      </button>
+    </div>
+
+    <!-- Live Sliders -->
+    <div class="slider-group">
+      <div class="slider-row">
+        <div class="slider-info">
+          <span class="slider-label">Brightness</span>
+          <span id="valBrightness" class="slider-val">100%</span>
+        </div>
+        <input type="range" id="inputBrightness" min="60" max="120" value="100" class="range-slider">
+      </div>
+
+      <div class="slider-row">
+        <div class="slider-info">
+          <span class="slider-label">Contrast</span>
+          <span id="valContrast" class="slider-val">95%</span>
+        </div>
+        <input type="range" id="inputContrast" min="60" max="140" value="95" class="range-slider">
+      </div>
+
+      <div class="slider-row">
+        <div class="slider-info">
+          <span class="slider-label">Warmth / Sepia</span>
+          <span id="valSepia" class="slider-val">0%</span>
+        </div>
+        <input type="range" id="inputSepia" min="0" max="100" value="0" class="range-slider">
+      </div>
+
+      <div class="slider-row">
+        <div class="slider-info">
+          <span class="slider-label">Grayscale</span>
+          <span id="valGrayscale" class="slider-val">0%</span>
+        </div>
+        <input type="range" id="inputGrayscale" min="0" max="100" value="0" class="range-slider">
+      </div>
+    </div>
+
+    <!-- Additional Toggles & Reset -->
+    <div class="footer-actions">
+      <label class="checkbox-container">
+        <input type="checkbox" id="fontBoostToggle" checked>
+        <span class="checkmark"></span>
+        <span class="checkbox-text">Font Smoothing Boost</span>
+      </label>
+      <button id="resetSlidersBtn" class="reset-btn" title="Reset adjustments to default">
+        Reset
+      </button>
+    </div>
+
+    <!-- Keyboard Shortcut Hint -->
+    <div class="shortcut-tip">
+      <span>Tip: Press <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd> to toggle site</span>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

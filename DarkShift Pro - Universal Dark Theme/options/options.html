@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DarkShift Pro - Settings & Dashboard</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </div>
+        <div>
+          <h1 class="brand-title">DarkShift<span class="pro-tag">PRO</span></h1>
+          <p class="brand-subtitle">Universal Theme Engine</p>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <button class="nav-item active" data-tab="tab-general">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          General
+        </button>
+        <button class="nav-item" data-tab="tab-sites">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          Site Rules
+        </button>
+        <button class="nav-item" data-tab="tab-schedule">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          Schedule
+        </button>
+        <button class="nav-item" data-tab="tab-custom-css">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>
+          Custom CSS
+        </button>
+        <button class="nav-item" data-tab="tab-backup">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Backup & Sync
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="version-info">Version 1.0.0</div>
+        <div class="shortcuts-legend">
+          <span>Toggle Site: <kbd>Alt+Shift+D</kbd></span>
+          <span>Global: <kbd>Alt+Shift+M</kbd></span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Panels -->
+    <main class="main-content">
+      <!-- General Tab -->
+      <section id="tab-general" class="content-panel active">
+        <div class="panel-header">
+          <h2>General Preferences</h2>
+          <p>Configure default rendering behaviour and global visual engines.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-row">
+            <div>
+              <div class="card-title">Universal Dark Mode</div>
+              <div class="card-desc">Master switch to enable or disable dark theme globally.</div>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="optMasterToggle" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Default Rendering Engine</div>
+          <div class="card-desc">Select the primary transformation method used across websites.</div>
+          
+          <div class="radio-cards">
+            <label class="radio-card">
+              <input type="radio" name="optEngine" value="smart-invert" checked>
+              <div class="radio-card-content">
+                <span class="radio-badge">Recommended</span>
+                <span class="radio-title">🌟 Smart Inversion</span>
+                <span class="radio-desc">High-speed CSS inversion preserving pictures, videos, logos and canvas. Works on 99% of websites.</span>
+              </div>
+            </label>
+
+            <label class="radio-card">
+              <input type="radio" name="optEngine" value="dynamic-dark">
+              <div class="radio-card-content">
+                <span class="radio-title">🎨 Dynamic Charcoal</span>
+                <span class="radio-desc">Modern dark stylesheet with custom background colors, borders, cards, and input fields.</span>
+              </div>
+            </label>
+
+            <label class="radio-card">
+              <input type="radio" name="optEngine" value="oled-dark">
+              <div class="radio-card-content">
+                <span class="radio-title">🖤 OLED Pure Black</span>
+                <span class="radio-desc">Pitch black #000000 background for AMOLED laptop displays and extreme battery conservation.</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-row">
+            <div>
+              <div class="card-title">Font Smoothing & Crisp Boost</div>
+              <div class="card-desc">Applies antialiased font smoothing for enhanced clarity and comfort when reading on dark backgrounds.</div>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="optFontBoost" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sites Tab -->
+      <section id="tab-sites" class="content-panel">
+        <div class="panel-header">
+          <h2>Site Rules & Exclusions</h2>
+          <p>Control exactly which websites DarkShift applies to.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-row">
+            <div>
+              <div class="card-title">Rule Filtering Mode</div>
+              <div class="card-desc">Choose whether DarkShift runs everywhere by default or only on approved sites.</div>
+            </div>
+            <select id="optListMode" class="select-dropdown">
+              <option value="blacklist">Blacklist Mode (Apply everywhere EXCEPT excluded sites)</option>
+              <option value="whitelist">Whitelist Mode (ONLY apply on approved sites)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="site-input-group">
+            <input type="text" id="newDomainInput" placeholder="Enter domain (e.g. example.com)" class="text-input">
+            <button id="addDomainBtn" class="btn btn-primary">Add Domain</button>
+          </div>
+
+          <div class="search-box">
+            <input type="text" id="domainSearchInput" placeholder="Filter domain list..." class="text-input search-input">
+          </div>
+
+          <div class="domains-list-header">
+            <span id="domainsCountLabel">0 domains configured</span>
+            <button id="clearAllDomainsBtn" class="btn-link-danger">Clear All</button>
+          </div>
+
+          <div id="domainsContainer" class="domains-grid">
+            <!-- Dynamic site chips -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Schedule Tab -->
+      <section id="tab-schedule" class="content-panel">
+        <div class="panel-header">
+          <h2>Automation & Night Schedule</h2>
+          <p>Automate dark mode activation according to daylight, your system theme, or specific times.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-row">
+            <div>
+              <div class="card-title">Enable Schedule</div>
+              <div class="card-desc">DarkShift automatically activates only during specified periods.</div>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="optScheduleEnabled">
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div id="scheduleOptionsContainer" class="schedule-sub-panel">
+            <div class="radio-row">
+              <label class="radio-inline">
+                <input type="radio" name="optScheduleMode" value="system" checked>
+                <span>Follow System OS Theme (activates when macOS/Windows is in Dark Mode)</span>
+              </label>
+            </div>
+
+            <div class="radio-row">
+              <label class="radio-inline">
+                <input type="radio" name="optScheduleMode" value="time">
+                <span>Custom Daily Time Window</span>
+              </label>
+            </div>
+
+            <div id="timeInputsRow" class="time-inputs-row">
+              <div class="time-field">
+                <label>Turn ON At:</label>
+                <input type="time" id="optScheduleStart" value="20:00" class="time-input">
+              </div>
+              <div class="time-field">
+                <label>Turn OFF At:</label>
+                <input type="time" id="optScheduleEnd" value="07:00" class="time-input">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Custom CSS Tab -->
+      <section id="tab-custom-css" class="content-panel">
+        <div class="panel-header">
+          <h2>Per-Site Custom CSS</h2>
+          <p>Write bespoke CSS snippets for tricky websites that need custom tweaks.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Add Custom Style Rule</div>
+          <div class="custom-css-form">
+            <input type="text" id="cssDomainInput" placeholder="Target domain (e.g. oldforum.org)" class="text-input">
+            <textarea id="cssCodeInput" placeholder="/* Custom CSS */&#10;header { background-color: #1a1a1a !important; }" class="code-textarea" rows="5"></textarea>
+            <button id="saveCustomCssBtn" class="btn btn-primary">Save Custom CSS</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Active Custom Rules</div>
+          <div id="customCssList" class="custom-css-list">
+            <!-- Dynamic CSS items -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Backup Tab -->
+      <section id="tab-backup" class="content-panel">
+        <div class="panel-header">
+          <h2>Backup, Import & Reset</h2>
+          <p>Export your custom site exclusions and visual preferences or restore from a previous file.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Export Settings</div>
+          <div class="card-desc">Download a JSON backup containing all your theme parameters, whitelists, and custom CSS.</div>
+          <button id="exportSettingsBtn" class="btn btn-secondary">Export Configuration (.json)</button>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Import Settings</div>
+          <div class="card-desc">Upload a previously exported JSON backup to restore your preferences.</div>
+          <input type="file" id="importFileInput" accept=".json" style="display:none">
+          <button id="importSettingsBtn" class="btn btn-secondary">Import Configuration File...</button>
+        </div>
+
+        <div class="card card-danger">
+          <div class="card-title">Reset to Factory Defaults</div>
+          <div class="card-desc">Wipes all custom domain rules and restores original DarkShift settings.</div>
+          <button id="resetDefaultsBtn" class="btn btn-danger">Reset Everything</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="toast">Settings Saved</div>
+
+  <script src="options.js"></script>
+</body>
+</html>

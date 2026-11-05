@@ -1,0 +1,80 @@
+/* ==========================================================================
+   DarkShift Pro - OLED Pure Black Engine
+   Pitch black backgrounds (#000000) for OLED/AMOLED power saving & deep contrast.
+   ========================================================================== */
+
+:root {
+  --darkshift-oled-black: #000000;
+  --darkshift-oled-surface: #0a0a0a;
+  --darkshift-oled-card: #121212;
+  --darkshift-oled-border: #222222;
+  --darkshift-oled-text: #f4f4f5;
+  --darkshift-oled-text-muted: #888888;
+  --darkshift-oled-accent: #38bdf8;
+}
+
+html[data-darkshift-theme="oled-dark"],
+html[data-darkshift-theme="oled-dark"] body {
+  background-color: var(--darkshift-oled-black) !important;
+  color: var(--darkshift-oled-text) !important;
+  color-scheme: dark !important;
+}
+
+html[data-darkshift-theme="oled-dark"] body {
+  filter: brightness(var(--darkshift-brightness, 100%)) 
+          contrast(var(--darkshift-contrast, 100%)) 
+          sepia(var(--darkshift-sepia, 0%)) 
+          grayscale(var(--darkshift-grayscale, 0%)) !important;
+}
+
+html[data-darkshift-theme="oled-dark"] header,
+html[data-darkshift-theme="oled-dark"] nav,
+html[data-darkshift-theme="oled-dark"] footer,
+html[data-darkshift-theme="oled-dark"] aside,
+html[data-darkshift-theme="oled-dark"] main,
+html[data-darkshift-theme="oled-dark"] section,
+html[data-darkshift-theme="oled-dark"] article,
+html[data-darkshift-theme="oled-dark"] .navbar,
+html[data-darkshift-theme="oled-dark"] .card,
+html[data-darkshift-theme="oled-dark"] .panel,
+html[data-darkshift-theme="oled-dark"] .modal,
+html[data-darkshift-theme="oled-dark"] .dropdown-menu {
+  background-color: var(--darkshift-oled-surface) !important;
+  border-color: var(--darkshift-oled-border) !important;
+  color: var(--darkshift-oled-text) !important;
+}
+
+html[data-darkshift-theme="oled-dark"] a {
+  color: var(--darkshift-oled-accent) !important;
+}
+
+html[data-darkshift-theme="oled-dark"] input:not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]),
+html[data-darkshift-theme="oled-dark"] textarea,
+html[data-darkshift-theme="oled-dark"] select {
+  background-color: var(--darkshift-oled-surface) !important;
+  color: var(--darkshift-oled-text) !important;
+  border: 1px solid var(--darkshift-oled-border) !important;
+}
+
+html[data-darkshift-theme="oled-dark"] button {
+  background-color: var(--darkshift-oled-card) !important;
+  color: var(--darkshift-oled-text) !important;
+  border-color: var(--darkshift-oled-border) !important;
+}
+
+html[data-darkshift-theme="oled-dark"] pre,
+html[data-darkshift-theme="oled-dark"] code {
+  background-color: #050505 !important;
+  border-color: var(--darkshift-oled-border) !important;
+}
+
+html[data-darkshift-theme="oled-dark"] ::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px !important;
+  background-color: #000000 !important;
+}
+
+html[data-darkshift-theme="oled-dark"] ::-webkit-scrollbar-thumb {
+  background-color: #222222 !important;
+  border-radius: 4px !important;
+}

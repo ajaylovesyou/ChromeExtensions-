@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CipherVault Web Vault - Password Manager & Passkeys</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body class="theme-bitwarden-blue">
+  <div class="vault-app-layout">
+
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <svg viewBox="0 0 24 24" class="brand-shield"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18l7 3.12v4.7c0 4.54-3.14 8.79-7 9.88-3.86-1.09-7-5.34-7-9.88V6.3l7-3.12zM12 7a2.5 2.5 0 00-2.5 2.5c0 1.05.65 1.95 1.58 2.32L10 16h4l-1.08-4.18c.93-.37 1.58-1.27 1.58-2.32A2.5 2.5 0 0012 7z"/></svg>
+        <span class="brand-name">CipherVault</span>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="nav-section-title">VAULT</div>
+        <nav class="sidebar-nav">
+          <button class="nav-item active" data-nav="all">
+            <span class="nav-icon">🗄️</span>
+            <span class="nav-label">All Items</span>
+            <span class="nav-counter" id="cnt-all">0</span>
+          </button>
+          <button class="nav-item" data-nav="favorites">
+            <span class="nav-icon">★</span>
+            <span class="nav-label">Favorites</span>
+            <span class="nav-counter" id="cnt-fav">0</span>
+          </button>
+          <button class="nav-item" data-nav="login">
+            <span class="nav-icon">🔐</span>
+            <span class="nav-label">Logins</span>
+            <span class="nav-counter" id="cnt-login">0</span>
+          </button>
+          <button class="nav-item" data-nav="passkey">
+            <span class="nav-icon">🔑</span>
+            <span class="nav-label">Passkeys (FIDO2)</span>
+            <span class="nav-counter" id="cnt-passkey">0</span>
+          </button>
+          <button class="nav-item" data-nav="card">
+            <span class="nav-icon">💳</span>
+            <span class="nav-label">Cards</span>
+            <span class="nav-counter" id="cnt-card">0</span>
+          </button>
+          <button class="nav-item" data-nav="note">
+            <span class="nav-icon">📝</span>
+            <span class="nav-label">Secure Notes</span>
+            <span class="nav-counter" id="cnt-note">0</span>
+          </button>
+        </nav>
+
+        <div class="nav-section-title">
+          <span>FOLDERS</span>
+          <button class="btn-add-folder" id="btn-sidebar-add-folder" title="Create Folder">+</button>
+        </div>
+        <nav class="sidebar-nav" id="sidebar-folders-nav">
+          <!-- Rendered dynamically -->
+        </nav>
+
+        <div class="nav-section-title">TOOLS & SECURITY</div>
+        <nav class="sidebar-nav">
+          <button class="nav-item" data-nav="health">
+            <span class="nav-icon">🩺</span>
+            <span class="nav-label">Security Health Audit</span>
+            <span class="health-score-badge" id="sidebar-health-score">92%</span>
+          </button>
+          <button class="nav-item" data-nav="generator">
+            <span class="nav-icon">⚡</span>
+            <span class="nav-label">Password Generator</span>
+          </button>
+          <button class="nav-item" data-nav="send">
+            <span class="nav-icon">📤</span>
+            <span class="nav-label">Bitwarden Send</span>
+          </button>
+          <button class="nav-item" data-nav="settings">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-label">Settings & Export</span>
+          </button>
+          <button class="nav-item" data-nav="playground">
+            <span class="nav-icon">🧪</span>
+            <span class="nav-label">Autofill Playground</span>
+          </button>
+        </nav>
+      </div>
+
+      <div class="sidebar-footer">
+        <button class="btn btn-outline-light btn-block" id="btn-sidebar-lock">🔒 Lock Vault</button>
+      </div>
+    </aside>
+
+    <!-- MAIN APP AREA (MIDDLE LIST + RIGHT PANE) -->
+    <main class="main-content">
+
+      <!-- TOP ACTION BAR -->
+      <header class="top-bar">
+        <div class="search-box">
+          <svg class="search-svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+          <input type="text" id="full-search-input" placeholder="Search passwords, passkeys, notes, cards...">
+        </div>
+        <div class="top-bar-actions">
+          <button class="btn btn-primary" id="btn-top-add-item">+ New Item</button>
+        </div>
+      </header>
+
+      <!-- PANES CONTAINER -->
+      <div class="panes-container">
+
+        <!-- MIDDLE PANE: ITEMS LIST (When in Vault view) -->
+        <section class="middle-pane" id="pane-items-list">
+          <div class="pane-header">
+            <span class="pane-title" id="pane-category-title">All Vault Items</span>
+            <span class="pane-count" id="pane-items-count">0 items</span>
+          </div>
+          <div class="items-table-container">
+            <div id="full-items-list" class="full-items-list">
+              <!-- Rendered dynamically -->
+            </div>
+            <div id="empty-list-placeholder" class="empty-placeholder" style="display: none;">
+              <p>No items found in this section.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- RIGHT PANE: ITEM DETAILS & EDITOR -->
+        <section class="right-pane" id="pane-item-detail">
+          <div id="detail-empty-view" class="detail-empty">
+            <svg viewBox="0 0 24 24" class="watermark-shield"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18l7 3.12v4.7c0 4.54-3.14 8.79-7 9.88-3.86-1.09-7-5.34-7-9.88V6.3l7-3.12z"/></svg>
+            <h3>Select an item to view details</h3>
+            <p>Or click "+ New Item" to store credentials with zero-knowledge encryption.</p>
+          </div>
+
+          <div id="detail-active-view" class="detail-content" style="display: none;">
+            <!-- Rendered dynamically -->
+            <span id="full-totp-display" style="display: none;"></span>
+          </div>
+        </section>
+
+        <!-- SPECIAL VIEW: SECURITY HEALTH DASHBOARD -->
+        <section class="full-page-view" id="pane-health-view" style="display: none;">
+          <div class="health-dashboard-wrapper">
+            <div class="dashboard-hero">
+              <div class="health-gauge-circle" id="dash-gauge-score">92%</div>
+              <div class="dashboard-hero-text">
+                <h2 id="dash-grade-heading">Vault Health: Grade A (Secure)</h2>
+                <p id="dash-grade-desc">Zero breached passwords detected. 2 accounts protected with Two-Factor Authentication.</p>
+              </div>
+            </div>
+
+            <div class="audit-metrics-grid">
+              <div class="metric-card danger" id="card-breached">
+                <div class="metric-header">
+                  <span class="metric-title">Compromised Passwords</span>
+                  <span class="metric-val" id="val-breached-count">0</span>
+                </div>
+                <p class="metric-desc">Passwords found in known public breaches or dictionary lists.</p>
+                <div class="metric-list" id="list-breached-items"></div>
+              </div>
+
+              <div class="metric-card warning" id="card-reused">
+                <div class="metric-header">
+                  <span class="metric-title">Reused Passwords</span>
+                  <span class="metric-val" id="val-reused-count">0</span>
+                </div>
+                <p class="metric-desc">Accounts sharing identical passwords across different services.</p>
+                <div class="metric-list" id="list-reused-items"></div>
+              </div>
+
+              <div class="metric-card info" id="card-weak">
+                <div class="metric-header">
+                  <span class="metric-title">Weak Passwords</span>
+                  <span class="metric-val" id="val-weak-count">0</span>
+                </div>
+                <p class="metric-desc">Passwords with low complexity, missing numbers/symbols, or under 10 chars.</p>
+                <div class="metric-list" id="list-weak-items"></div>
+              </div>
+
+              <div class="metric-card success" id="card-inactive-2fa">
+                <div class="metric-header">
+                  <span class="metric-title">Inactive 2FA</span>
+                  <span class="metric-val" id="val-2fa-count">0</span>
+                </div>
+                <p class="metric-desc">Supported services without Two-Factor Authentication configured.</p>
+                <div class="metric-list" id="list-2fa-items"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SPECIAL VIEW: SETTINGS VIEW -->
+        <section class="full-page-view" id="pane-settings-view" style="display: none;">
+          <div class="full-settings-wrapper">
+            <h2>Vault Settings & Data Portability</h2>
+            <div class="settings-card">
+              <h3>Encryption & Security Architecture</h3>
+              <p>CipherVault uses client-side <strong>AES-256-GCM</strong> encryption with <strong>PBKDF2 SHA-256 (100,000 iterations)</strong>. Your master password and decrypted records are never sent over the network.</p>
+            </div>
+
+            <div class="settings-card">
+              <h3>Import & Export Vault Data</h3>
+              <p>Easily export or import your credentials. Fully compatible with official Bitwarden JSON, Bitwarden CSV, Google Chrome, and 1Password.</p>
+              <div class="settings-btn-row">
+                <button class="btn btn-primary" id="btn-full-export-json">Export to Bitwarden JSON</button>
+                <button class="btn btn-secondary" id="btn-full-export-csv">Export to Bitwarden CSV</button>
+                <button class="btn btn-secondary" id="btn-full-import">Import File (JSON / CSV)</button>
+              </div>
+            </div>
+
+            <div class="settings-card">
+              <h3>Theme & Display</h3>
+              <div class="theme-select-container">
+                <label for="full-theme-select">Theme Selection</label>
+                <select id="full-theme-select" class="form-select">
+                  <option value="theme-bitwarden-blue">🌌 Cyber Obsidian (Default)</option>
+                  <option value="theme-dark">⚡ Neo-Tokyo Violet</option>
+                  <option value="theme-oled">🛡️ Sapphire Royal</option>
+                  <option value="theme-light">💎 Titanium Frost</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SPECIAL VIEW: GENERATOR VIEW -->
+        <section class="full-page-view" id="pane-generator-view" style="display: none;">
+          <div class="full-settings-wrapper">
+            <h2>Smart Password, Passphrase & Username Generator</h2>
+            
+            <div class="settings-card">
+              <div class="gen-output-header">
+                <h3>Generated Output</h3>
+                <div class="gen-output-btns">
+                  <button class="btn btn-secondary btn-sm" id="btn-opt-copy-gen">📋 Copy</button>
+                  <button class="btn btn-primary btn-sm" id="btn-opt-refresh-gen">🔄 Regenerate</button>
+                </div>
+              </div>
+
+              <div class="gen-output-display" id="opt-gen-output">
+                ••••••••••••••••
+              </div>
+
+              <div class="gen-meta-row">
+                <span id="opt-gen-strength-label">Strong</span>
+                <span id="opt-gen-entropy-label">78 bits • Centuries</span>
+              </div>
+              <div class="gen-meter-track">
+                <div id="opt-gen-strength-fill" class="gen-meter-fill"></div>
+              </div>
+
+              <!-- Options -->
+              <div class="gen-config-grid">
+                <div class="gen-config-left">
+                  <label class="gen-slider-label">
+                    Password Length: <strong id="lbl-opt-pwd-len">16</strong>
+                  </label>
+                  <input type="range" id="slider-opt-pwd-len" min="8" max="64" value="16" class="gen-range-slider">
+
+                  <div class="gen-checkbox-grid">
+                    <label class="gen-chk-label">
+                      <input type="checkbox" id="chk-opt-gen-upper" checked> A-Z (Uppercase)
+                    </label>
+                    <label class="gen-chk-label">
+                      <input type="checkbox" id="chk-opt-gen-lower" checked> a-z (Lowercase)
+                    </label>
+                    <label class="gen-chk-label">
+                      <input type="checkbox" id="chk-opt-gen-num" checked> 0-9 (Numbers)
+                    </label>
+                    <label class="gen-chk-label">
+                      <input type="checkbox" id="chk-opt-gen-spec" checked> !@#$ (Symbols)
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Save to Vault directly from Generator in Options -->
+                <div class="gen-quick-save-card">
+                  <h4 class="gen-quick-save-title">💾 Quick Save to Vault with Email</h4>
+                  <div class="form-group-field">
+                    <label class="gen-input-label">Email ID / Username *</label>
+                    <input type="text" id="input-opt-gen-email" class="form-input" placeholder="e.g. alex.carter@gmail.com">
+                  </div>
+                  <div class="form-group-field">
+                    <label class="gen-input-label">Website / Service Name</label>
+                    <input type="text" id="input-opt-gen-name" class="form-input" placeholder="e.g. GitHub, Google, Spotify">
+                  </div>
+                  <div class="form-group-field">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                      <label class="gen-input-label" style="margin-bottom: 0;">Password to Save</label>
+                      <div class="pwd-source-toggle">
+                        <button type="button" class="pwd-source-btn active" id="btn-opt-pwd-auto" title="Use auto-generated password">⚡ Generated</button>
+                        <button type="button" class="pwd-source-btn" id="btn-opt-pwd-custom" title="Enter your own password">✍️ Enter My Own</button>
+                      </div>
+                    </div>
+                    <div class="password-input-wrapper" style="position: relative;">
+                      <input type="password" id="input-opt-gen-pwd" class="form-input" placeholder="Generated password">
+                      <button type="button" class="toggle-password-btn" id="btn-toggle-opt-gen-pwd" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: transparent; border: none; cursor: pointer; color: var(--text-muted); font-size: 14px;">👁</button>
+                    </div>
+                    <div id="opt-custom-pwd-strength" class="custom-strength-indicator" style="display: none;"></div>
+                  </div>
+                  <button class="btn btn-primary btn-block" id="btn-opt-gen-save">Save Password & Email to Vault</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Global Toast -->
+  <div id="options-toast" class="options-toast" style="display: none;"></div>
+
+  <!-- Scripts -->
+  <script src="../lib/crypto.js"></script>
+  <script src="../lib/totp.js"></script>
+  <script src="../lib/passkey.js"></script>
+  <script src="../lib/generator.js"></script>
+  <script src="../lib/health.js"></script>
+  <script src="../lib/send.js"></script>
+  <script src="../lib/importer.js"></script>
+  <script src="../lib/vault.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

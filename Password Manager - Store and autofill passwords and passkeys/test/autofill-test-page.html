@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bitwarden Password Manager & Passkeys - Interactive Test Playground</title>
+  <style>
+    :root {
+      --primary: #175ddc;
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 30px 20px;
+      line-height: 1.5;
+    }
+    .header-banner {
+      max-width: 900px;
+      margin: 0 auto 30px auto;
+      background: linear-gradient(135deg, #175ddc 0%, #0d2861 100%);
+      color: #ffffff;
+      padding: 24px 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px -5px rgba(23, 93, 220, 0.25);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .shield-icon {
+      width: 50px;
+      height: 50px;
+      fill: #ffffff;
+      flex-shrink: 0;
+    }
+    .grid-container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 12px;
+      background: #e0f2fe;
+      color: #0369a1;
+      text-transform: uppercase;
+    }
+    .card-desc {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .form-group label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .form-input {
+      width: 100%;
+      height: 38px;
+      padding: 0 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+    .form-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(23, 93, 220, 0.15);
+    }
+    .btn {
+      padding: 10px 16px;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+    }
+    .btn-primary:hover {
+      background: #124cb4;
+    }
+    .btn-outline {
+      background: #ffffff;
+      border-color: var(--border);
+      color: var(--text);
+    }
+    .btn-outline:hover {
+      background: #f8fafc;
+    }
+    .full-width-card {
+      grid-column: 1 / -1;
+    }
+    .log-console {
+      background: #0f172a;
+      color: #38bdf8;
+      font-family: monospace;
+      font-size: 12px;
+      padding: 16px;
+      border-radius: 8px;
+      max-height: 180px;
+      overflow-y: auto;
+    }
+    .log-line {
+      margin-bottom: 4px;
+    }
+    .success-alert {
+      padding: 12px;
+      background: #dcfce7;
+      border: 1px solid #bbf7d0;
+      border-radius: 6px;
+      color: #15803d;
+      font-size: 13px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header-banner">
+    <svg viewBox="0 0 24 24" class="shield-icon">
+      <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18l7 3.12v4.7c0 4.54-3.14 8.79-7 9.88-3.86-1.09-7-5.34-7-9.88V6.3l7-3.12zM12 7a2.5 2.5 0 00-2.5 2.5c0 1.05.65 1.95 1.58 2.32L10 16h4l-1.08-4.18c.93-.37 1.58-1.27 1.58-2.32A2.5 2.5 0 0012 7z"/>
+    </svg>
+    <div>
+      <h1 style="font-size: 24px; font-weight: 800; margin-bottom: 4px;">Bitwarden Test Playground</h1>
+      <p style="font-size: 14px; opacity: 0.9;">
+        Test passwords autofill, in-field badges, passkey authentication, credit card fill, and form submission capture.
+      </p>
+    </div>
+  </header>
+
+  <main class="grid-container">
+
+    <!-- 1. STANDARD LOGIN FORM -->
+    <section class="card">
+      <div class="card-title">
+        <span>Standard Login Form</span>
+        <span class="badge">Autofill & Badge</span>
+      </div>
+      <p class="card-desc">
+        Notice the blue Bitwarden shield inside the fields. Click it or press <code>Ctrl+Shift+L</code> to autofill.
+      </p>
+      <form id="form-login" onsubmit="event.preventDefault(); handleLoginSubmit();">
+        <div class="form-group" style="margin-bottom: 12px;">
+          <label for="login-username">Username or Email</label>
+          <input type="text" id="login-username" name="username" class="form-input" autocomplete="username" placeholder="name@example.com">
+        </div>
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" name="password" class="form-input" autocomplete="current-password" placeholder="••••••••••••">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+      </form>
+      <div id="alert-login" class="success-alert">✓ Login credentials verified!</div>
+    </section>
+
+    <!-- 2. PASSKEY / WEBAUTHN SIMULATION -->
+    <section class="card">
+      <div class="card-title">
+        <span>FIDO2 / WebAuthn Passkeys</span>
+        <span class="badge" style="background:#fef3c7; color:#92400e;">Passkeys</span>
+      </div>
+      <p class="card-desc">
+        Modern passwordless authentication using cryptographic ECDSA P-256 keys.
+      </p>
+      <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+        <button class="btn btn-outline" id="btn-passkey-login" style="padding: 12px; font-weight: 700;">
+          🔑 Sign In with Bitwarden Passkey
+        </button>
+        <button class="btn btn-outline" id="btn-passkey-register">
+          ➕ Register New Passkey for this Page
+        </button>
+      </div>
+      <div id="alert-passkey" class="success-alert">✓ Passkey authenticated with ECDSA assertion!</div>
+    </section>
+
+    <!-- 3. TWO-FACTOR AUTHENTICATION (TOTP) -->
+    <section class="card">
+      <div class="card-title">
+        <span>Two-Factor Authentication</span>
+        <span class="badge" style="background:#dcfce7; color:#15803d;">TOTP 2FA</span>
+      </div>
+      <p class="card-desc">
+        Bitwarden generates live RFC 6238 6-digit verification codes with 30-second timers.
+      </p>
+      <form onsubmit="event.preventDefault(); logEvent('2FA code submitted: ' + document.getElementById('input-totp').value);">
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label for="input-totp">6-Digit Verification Code</label>
+          <input type="text" id="input-totp" class="form-input" autocomplete="one-time-code" placeholder="123 456" maxlength="7">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Verify Code</button>
+      </form>
+    </section>
+
+    <!-- 4. CREDIT CARD CHECKOUT FORM -->
+    <section class="card">
+      <div class="card-title">
+        <span>Payment & Cards</span>
+        <span class="badge" style="background:#f3e8ff; color:#7e22ce;">PCI Vault</span>
+      </div>
+      <p class="card-desc">
+        Click the field badge to autofill your securely encrypted credit card details.
+      </p>
+      <form onsubmit="event.preventDefault(); logEvent('Card details submitted');">
+        <div class="form-group" style="margin-bottom: 10px;">
+          <label>Cardholder Name</label>
+          <input type="text" id="cc-name" class="form-input" autocomplete="cc-name" placeholder="Alex Carter">
+        </div>
+        <div class="form-group" style="margin-bottom: 10px;">
+          <label>Card Number</label>
+          <input type="text" id="cc-number" class="form-input" autocomplete="cc-number" placeholder="4532 •••• •••• 8841">
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px;">
+          <div class="form-group">
+            <label>Expiry (MM/YY)</label>
+            <input type="text" id="cc-exp" class="form-input" autocomplete="cc-exp" placeholder="08/28">
+          </div>
+          <div class="form-group">
+            <label>CVV / CVC</label>
+            <input type="password" id="cc-csc" class="form-input" autocomplete="cc-csc" placeholder="CVV" maxlength="4">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Pay Securely</button>
+      </form>
+    </section>
+
+    <!-- 5. SIGN UP / NEW ACCOUNT REGISTRATION (Trigger Save Password) -->
+    <section class="card">
+      <div class="card-title">
+        <span>Registration Form (Save Trigger)</span>
+        <span class="badge">Credential Capture</span>
+      </div>
+      <p class="card-desc">
+        Fill out this registration form and click "Create Account". Bitwarden will automatically prompt you: <em>"Save password to Bitwarden?"</em> at top right!
+      </p>
+      <form id="form-register" onsubmit="event.preventDefault(); handleRegisterSubmit();">
+        <div class="form-group" style="margin-bottom: 12px;">
+          <label>Email Address</label>
+          <input type="email" id="reg-email" class="form-input" placeholder="newuser@example.com" required>
+        </div>
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label>Choose Password</label>
+          <input type="password" id="reg-pwd" class="form-input" placeholder="Strong password" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+      </form>
+    </section>
+
+    <!-- 6. CREATE PASSWORD & SAVE WITH EMAIL ID TEST -->
+    <section class="card">
+      <div class="card-title">
+        <span>Create Password & Save with Email</span>
+        <span class="badge" style="background:#e0f2fe; color:#0284c7;">Quick Save</span>
+      </div>
+      <p class="card-desc">
+        Test generating a strong password in the field or popup, then saving it with your email ID.
+      </p>
+      <form id="form-create-pwd" onsubmit="event.preventDefault(); handleCreatePwdSubmit();">
+        <div class="form-group" style="margin-bottom: 12px;">
+          <label>Email ID</label>
+          <input type="email" id="create-email" class="form-input" placeholder="alex.carter@gmail.com" value="alex.carter@gmail.com">
+        </div>
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label>Generated Strong Password</label>
+          <div style="display: flex; gap: 8px;">
+            <input type="password" id="create-pwd" class="form-input" placeholder="Click badge or Generate">
+            <button type="button" class="btn btn-outline" id="btn-page-gen-pwd" title="Generate Password">⚡</button>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Save Password & Sign Up</button>
+      </form>
+      <div id="alert-create-pwd" class="success-alert">✓ Credentials submitted! Prompt to save should appear above.</div>
+    </section>
+
+    <!-- LIVE EVENT CONSOLE -->
+    <section class="card full-width-card">
+      <div class="card-title">Live Playground Event Console</div>
+      <div class="log-console" id="log-console">
+        <div class="log-line">[Ready] Bitwarden Test Playground loaded. Awaiting input events...</div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    function logEvent(msg) {
+      const consoleEl = document.getElementById('log-console');
+      const line = document.createElement('div');
+      line.className = 'log-line';
+      const time = new Date().toLocaleTimeString();
+      line.textContent = `[${time}] ${msg}`;
+      consoleEl.appendChild(line);
+      consoleEl.scrollTop = consoleEl.scrollHeight;
+    }
+
+    function handleLoginSubmit() {
+      const u = document.getElementById('login-username').value;
+      const p = document.getElementById('login-password').value;
+      logEvent(`Login submitted: Username="${u}", Password=${p ? '••••••••' : '(empty)'}`);
+      document.getElementById('alert-login').style.display = 'block';
+    }
+
+    function handleRegisterSubmit() {
+      const u = document.getElementById('reg-email').value;
+      const p = document.getElementById('reg-pwd').value;
+      logEvent(`Registration submitted: User="${u}". Look for the Bitwarden Save Prompt banner at top-right!`);
+    }
+
+    function handleCreatePwdSubmit() {
+      const u = document.getElementById('create-email').value;
+      const p = document.getElementById('create-pwd').value;
+      logEvent(`Create password submitted for Email="${u}". Password length: ${p.length}`);
+      document.getElementById('alert-create-pwd').style.display = 'block';
+    }
+
+    document.getElementById('btn-page-gen-pwd')?.addEventListener('click', () => {
+      // Generate a strong demo password
+      const chars = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ23456789!@#$%^&*";
+      let pwd = "";
+      for (let i = 0; i < 18; i++) {
+        pwd += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      const pwdInput = document.getElementById('create-pwd');
+      pwdInput.value = pwd;
+      pwdInput.dispatchEvent(new Event('input', { bubbles: true }));
+      pwdInput.dispatchEvent(new Event('change', { bubbles: true }));
+      logEvent(`Generated strong 18-char password: ${pwd}`);
+    });
+
+    document.getElementById('btn-passkey-login').addEventListener('click', () => {
+      logEvent('Website requested WebAuthn Passkey assertion: navigator.credentials.get()');
+      // Trigger the custom Bitwarden passkey flow
+      window.dispatchEvent(new CustomEvent('bitwarden:request-passkey', {
+        detail: { rpId: window.location.hostname }
+      }));
+    });
+
+    document.getElementById('btn-passkey-register').addEventListener('click', () => {
+      const username = prompt('Enter username for new Passkey:', 'alex.developer@test.com');
+      if (username) {
+        logEvent(`Website requested WebAuthn registration: navigator.credentials.create() for ${username}`);
+        alert('Bitwarden extension will generate and store an authentic ECDSA P-256 keypair for this domain.');
+      }
+    });
+
+    window.addEventListener('bitwarden:passkey-authenticated', (e) => {
+      logEvent(`Passkey authenticated successfully: ID="${e.detail.credentialId}" for "${e.detail.rpId}"`);
+      document.getElementById('alert-passkey').style.display = 'block';
+    });
+
+    // Monitor input changes
+    document.querySelectorAll('input').forEach(input => {
+      input.addEventListener('change', (e) => {
+        logEvent(`Input "${e.target.name || e.target.id || e.target.type}" changed to: ${e.target.type === 'password' ? '••••••••' : e.target.value}`);
+      });
+    });
+  </script>
+</body>
+</html>

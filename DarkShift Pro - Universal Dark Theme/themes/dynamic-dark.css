@@ -1,0 +1,162 @@
+/* ==========================================================================
+   DarkShift Pro - Dynamic Dark Engine
+   Selective stylesheet override for a modern, native dark UI experience.
+   ========================================================================== */
+
+:root {
+  --darkshift-bg-root: #121214;
+  --darkshift-bg-surface: #1a1a1e;
+  --darkshift-bg-card: #202026;
+  --darkshift-bg-elevated: #272730;
+  --darkshift-text-primary: #e4e4e7;
+  --darkshift-text-secondary: #a1a1aa;
+  --darkshift-text-muted: #71717a;
+  --darkshift-border: #2e2e38;
+  --darkshift-link: #60a5fa;
+  --darkshift-link-hover: #93c5fd;
+  --darkshift-input-bg: #18181c;
+  --darkshift-input-border: #3f3f46;
+  --darkshift-code-bg: #16161a;
+  
+  --darkshift-brightness: 100%;
+  --darkshift-contrast: 100%;
+  --darkshift-sepia: 0%;
+  --darkshift-grayscale: 0%;
+}
+
+html[data-darkshift-theme="dynamic-dark"] {
+  background-color: var(--darkshift-bg-root) !important;
+  color: var(--darkshift-text-primary) !important;
+  color-scheme: dark !important;
+}
+
+html[data-darkshift-theme="dynamic-dark"] body {
+  background-color: var(--darkshift-bg-root) !important;
+  color: var(--darkshift-text-primary) !important;
+  filter: brightness(var(--darkshift-brightness, 100%)) 
+          contrast(var(--darkshift-contrast, 100%)) 
+          sepia(var(--darkshift-sepia, 0%)) 
+          grayscale(var(--darkshift-grayscale, 0%)) !important;
+}
+
+/* Universal text color enforcement */
+html[data-darkshift-theme="dynamic-dark"] h1,
+html[data-darkshift-theme="dynamic-dark"] h2,
+html[data-darkshift-theme="dynamic-dark"] h3,
+html[data-darkshift-theme="dynamic-dark"] h4,
+html[data-darkshift-theme="dynamic-dark"] h5,
+html[data-darkshift-theme="dynamic-dark"] h6,
+html[data-darkshift-theme="dynamic-dark"] p,
+html[data-darkshift-theme="dynamic-dark"] span,
+html[data-darkshift-theme="dynamic-dark"] li,
+html[data-darkshift-theme="dynamic-dark"] label,
+html[data-darkshift-theme="dynamic-dark"] dt,
+html[data-darkshift-theme="dynamic-dark"] dd,
+html[data-darkshift-theme="dynamic-dark"] blockquote,
+html[data-darkshift-theme="dynamic-dark"] time {
+  color: inherit;
+}
+
+/* Common container surfaces */
+html[data-darkshift-theme="dynamic-dark"] header,
+html[data-darkshift-theme="dynamic-dark"] nav,
+html[data-darkshift-theme="dynamic-dark"] footer,
+html[data-darkshift-theme="dynamic-dark"] aside,
+html[data-darkshift-theme="dynamic-dark"] main,
+html[data-darkshift-theme="dynamic-dark"] section,
+html[data-darkshift-theme="dynamic-dark"] article,
+html[data-darkshift-theme="dynamic-dark"] .navbar,
+html[data-darkshift-theme="dynamic-dark"] .header,
+html[data-darkshift-theme="dynamic-dark"] .sidebar,
+html[data-darkshift-theme="dynamic-dark"] .card,
+html[data-darkshift-theme="dynamic-dark"] .panel,
+html[data-darkshift-theme="dynamic-dark"] .modal,
+html[data-darkshift-theme="dynamic-dark"] .dialog,
+html[data-darkshift-theme="dynamic-dark"] .dropdown-menu {
+  background-color: var(--darkshift-bg-surface) !important;
+  border-color: var(--darkshift-border) !important;
+  color: var(--darkshift-text-primary) !important;
+}
+
+/* Links */
+html[data-darkshift-theme="dynamic-dark"] a {
+  color: var(--darkshift-link) !important;
+}
+
+html[data-darkshift-theme="dynamic-dark"] a:hover {
+  color: var(--darkshift-link-hover) !important;
+}
+
+/* Form Controls & Inputs */
+html[data-darkshift-theme="dynamic-dark"] input:not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]),
+html[data-darkshift-theme="dynamic-dark"] textarea,
+html[data-darkshift-theme="dynamic-dark"] select {
+  background-color: var(--darkshift-input-bg) !important;
+  color: var(--darkshift-text-primary) !important;
+  border: 1px solid var(--darkshift-input-border) !important;
+  border-radius: 4px;
+}
+
+html[data-darkshift-theme="dynamic-dark"] input:focus,
+html[data-darkshift-theme="dynamic-dark"] textarea:focus,
+html[data-darkshift-theme="dynamic-dark"] select:focus {
+  border-color: var(--darkshift-link) !important;
+  outline: none !important;
+}
+
+html[data-darkshift-theme="dynamic-dark"] button,
+html[data-darkshift-theme="dynamic-dark"] input[type="button"],
+html[data-darkshift-theme="dynamic-dark"] input[type="submit"] {
+  background-color: var(--darkshift-bg-elevated) !important;
+  color: var(--darkshift-text-primary) !important;
+  border-color: var(--darkshift-border) !important;
+}
+
+/* Code & Preformatted Blocks */
+html[data-darkshift-theme="dynamic-dark"] pre,
+html[data-darkshift-theme="dynamic-dark"] code,
+html[data-darkshift-theme="dynamic-dark"] kbd,
+html[data-darkshift-theme="dynamic-dark"] samp {
+  background-color: var(--darkshift-code-bg) !important;
+  border-color: var(--darkshift-border) !important;
+  color: #38bdf8 !important;
+}
+
+/* Tables */
+html[data-darkshift-theme="dynamic-dark"] table,
+html[data-darkshift-theme="dynamic-dark"] th,
+html[data-darkshift-theme="dynamic-dark"] td {
+  border-color: var(--darkshift-border) !important;
+}
+
+html[data-darkshift-theme="dynamic-dark"] tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02) !important;
+}
+
+html[data-darkshift-theme="dynamic-dark"] th {
+  background-color: var(--darkshift-bg-surface) !important;
+  color: var(--darkshift-text-primary) !important;
+}
+
+/* Webkit Scrollbars */
+html[data-darkshift-theme="dynamic-dark"] ::-webkit-scrollbar {
+  width: 10px !important;
+  height: 10px !important;
+  background-color: #121214 !important;
+}
+
+html[data-darkshift-theme="dynamic-dark"] ::-webkit-scrollbar-thumb {
+  background-color: #27272a !important;
+  border-radius: 6px !important;
+  border: 2px solid #121214 !important;
+}
+
+html[data-darkshift-theme="dynamic-dark"] ::-webkit-scrollbar-thumb:hover {
+  background-color: #3f3f46 !important;
+}
+
+/* Font smoothing boost */
+html[data-darkshift-theme="dynamic-dark"].darkshift-font-boost {
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+}

@@ -1,0 +1,91 @@
+/* ==========================================================================
+   DarkShift Pro - Smart Invert Engine
+   Fast, universal dark theme filter that preserves media, images & videos.
+   ========================================================================== */
+
+:root {
+  --darkshift-brightness: 100%;
+  --darkshift-contrast: 95%;
+  --darkshift-sepia: 0%;
+  --darkshift-grayscale: 0%;
+  --darkshift-invert: 90%;
+}
+
+/* Invert root document */
+html[data-darkshift-theme="smart-invert"] {
+  background-color: #121214 !important;
+  color-scheme: dark !important;
+  filter: invert(var(--darkshift-invert, 90%)) hue-rotate(180deg) 
+          brightness(var(--darkshift-brightness, 100%)) 
+          contrast(var(--darkshift-contrast, 95%)) 
+          sepia(var(--darkshift-sepia, 0%)) 
+          grayscale(var(--darkshift-grayscale, 0%)) !important;
+}
+
+/* Make sure body background matches */
+html[data-darkshift-theme="smart-invert"] > body {
+  background-color: inherit !important;
+}
+
+/* Re-invert media elements so photos, videos, and thumbnails look natural */
+html[data-darkshift-theme="smart-invert"] img,
+html[data-darkshift-theme="smart-invert"] video,
+html[data-darkshift-theme="smart-invert"] canvas,
+html[data-darkshift-theme="smart-invert"] picture,
+html[data-darkshift-theme="smart-invert"] embed,
+html[data-darkshift-theme="smart-invert"] object,
+html[data-darkshift-theme="smart-invert"] [data-darkshift-media],
+html[data-darkshift-theme="smart-invert"] [style*="background-image"],
+html[data-darkshift-theme="smart-invert"] [style*="background: url"],
+html[data-darkshift-theme="smart-invert"] [style*="background:url"] {
+  filter: invert(100%) hue-rotate(180deg) !important;
+}
+
+/* Protect against double inversion for nested media elements */
+html[data-darkshift-theme="smart-invert"] picture img,
+html[data-darkshift-theme="smart-invert"] video img,
+html[data-darkshift-theme="smart-invert"] [style*="background-image"] img {
+  filter: none !important;
+}
+
+/* Keep fullscreen video players pristine and natural */
+html[data-darkshift-theme="smart-invert"] :fullscreen,
+html[data-darkshift-theme="smart-invert"] :-webkit-full-screen,
+html[data-darkshift-theme="smart-invert"] .video-stream,
+html[data-darkshift-theme="smart-invert"] .ytp-chrome-bottom,
+html[data-darkshift-theme="smart-invert"] .ytp-chrome-top {
+  filter: none !important;
+}
+
+/* Keep SVG icons visible & readable without over-inverting colored SVGs */
+html[data-darkshift-theme="smart-invert"] svg:not(:root) {
+  /* SVGs without explicit backgrounds stay nicely legible */
+}
+
+/* Universal Dark Scrollbars */
+html[data-darkshift-theme="smart-invert"] ::-webkit-scrollbar {
+  width: 10px !important;
+  height: 10px !important;
+  background-color: #18181b !important;
+}
+
+html[data-darkshift-theme="smart-invert"] ::-webkit-scrollbar-track {
+  background-color: #18181b !important;
+}
+
+html[data-darkshift-theme="smart-invert"] ::-webkit-scrollbar-thumb {
+  background-color: #3f3f46 !important;
+  border-radius: 6px !important;
+  border: 2px solid #18181b !important;
+}
+
+html[data-darkshift-theme="smart-invert"] ::-webkit-scrollbar-thumb:hover {
+  background-color: #52525b !important;
+}
+
+/* Enhanced font smoothing for comfortable reading */
+html[data-darkshift-theme="smart-invert"].darkshift-font-boost {
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  text-rendering: optimizeLegibility !important;
+}

@@ -1,0 +1,480 @@
+/* ==========================================================================
+   DarkShift Pro - Popup Styles
+   Premium dark futuristic UI with fluid controls and luminous accents.
+   ========================================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  user-select: none;
+}
+
+body {
+  width: 360px;
+  background-color: #0d0f17;
+  color: #f1f5f9;
+  font-size: 13px;
+  line-height: 1.4;
+  overflow-x: hidden;
+}
+
+.popup-container {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #1e2433;
+  padding-bottom: 12px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.35);
+}
+
+.brand-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  color: #f8fafc;
+}
+
+.brand-pro {
+  font-size: 10px;
+  font-weight: 800;
+  background: #6366f1;
+  color: #ffffff;
+  padding: 1px 4px;
+  border-radius: 4px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+.brand-desc {
+  font-size: 10px;
+  color: #94a3b8;
+}
+
+.icon-btn {
+  background: #191f2e;
+  border: 1px solid #2d3748;
+  color: #94a3b8;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.icon-btn:hover {
+  background: #252e42;
+  color: #ffffff;
+  border-color: #6366f1;
+}
+
+.icon-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Master Power Hero */
+.master-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0 6px 0;
+}
+
+.power-ring {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  border: 2px solid #273147;
+  background: #111624;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  outline: none;
+}
+
+.power-inner {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #1a2234;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  transition: all 0.3s ease;
+}
+
+.power-inner svg {
+  width: 26px;
+  height: 26px;
+}
+
+.power-ring.active {
+  border-color: #6366f1;
+  box-shadow: 0 0 24px rgba(99, 102, 241, 0.45);
+}
+
+.power-ring.active .power-inner {
+  background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+  color: #ffffff;
+}
+
+.master-status {
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 10px;
+  color: #f1f5f9;
+}
+
+.master-sub {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-top: 2px;
+}
+
+/* Site Card */
+.site-card {
+  background: #151a26;
+  border: 1px solid #242c3e;
+  border-radius: 10px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.site-icon-box {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: #1e2638;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #60a5fa;
+  flex-shrink: 0;
+}
+
+.site-icon-box svg {
+  width: 16px;
+  height: 16px;
+}
+
+.site-details {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.site-domain {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 190px;
+}
+
+.site-state {
+  font-size: 11px;
+  color: #10b981;
+}
+
+.site-state.disabled {
+  color: #94a3b8;
+}
+
+/* Toggle Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #334155;
+  transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 22px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #10b981;
+}
+
+input:checked + .slider:before {
+  transform: translateX(18px);
+}
+
+/* Theme Engine Selector */
+.section-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+.engine-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.engine-btn {
+  background: #141924;
+  border: 1px solid #232b3b;
+  border-radius: 8px;
+  padding: 8px 4px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: #94a3b8;
+  transition: all 0.2s ease;
+}
+
+.engine-btn:hover {
+  background: #1b2232;
+  color: #ffffff;
+}
+
+.engine-btn.active {
+  background: #1e2638;
+  border-color: #6366f1;
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.25);
+}
+
+.engine-emoji {
+  font-size: 14px;
+}
+
+.engine-name {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Sliders */
+.slider-group {
+  background: #131822;
+  border: 1px solid #202738;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.slider-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.slider-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+}
+
+.slider-label {
+  color: #94a3b8;
+}
+
+.slider-val {
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+.range-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 5px;
+  border-radius: 3px;
+  background: #252d3d;
+  outline: none;
+  cursor: pointer;
+}
+
+.range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #6366f1;
+  box-shadow: 0 0 6px rgba(99, 102, 241, 0.6);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.range-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+/* Footer Actions */
+.footer-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  font-size: 11px;
+  color: #94a3b8;
+  gap: 8px;
+}
+
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  width: 14px;
+  height: 14px;
+  background-color: #1e2638;
+  border: 1px solid #334155;
+  border-radius: 3px;
+  display: inline-block;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #6366f1;
+  border-color: #6366f1;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 4px;
+  top: 1px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.reset-btn {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-size: 11px;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.reset-btn:hover {
+  color: #f1f5f9;
+}
+
+/* Shortcut Tip */
+.shortcut-tip {
+  text-align: center;
+  font-size: 10px;
+  color: #64748b;
+  border-top: 1px solid #1a202c;
+  padding-top: 8px;
+}
+
+kbd {
+  background: #1e2638;
+  color: #94a3b8;
+  padding: 1px 4px;
+  border-radius: 3px;
+  border: 1px solid #2d3748;
+  font-family: monospace;
+}
